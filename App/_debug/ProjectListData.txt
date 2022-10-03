@@ -1,4 +1,4 @@
-﻿Web-Based Student Clearance System in PHP Free Source Code
+Web-Based Student Clearance System in PHP Free Source Code
 Canteen Management System Project Source Code in PHP Free Download
 School Fees Management System Project in PHP and CodeIgniter Free Source Code
 Food Ordering Management System in PHP and MySQL Free Source Code

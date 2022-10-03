@@ -10,18 +10,11 @@ class ProjectListScraper
 
    public function __construct()
    {
-      //$data = file_get_contents(dirname(__FILE__) . DIREC)
-      print Constants::ROOT_DIR;
-      die;
-
+      $this->data = file_get_contents(Constants::PROJECT_LIST_DATA_PATH . 'ProjectListData.txt');
    }
 
    public function GetProjectListArray() : array
    {
-      return [
-         1,
-         2,
-         3
-      ];
+      return explode(PHP_EOL,$this->data);
    }
 }
