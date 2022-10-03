@@ -5,26 +5,62 @@ namespace App;
 class FileDownloaderCurlWrapper
 {
    const ERROR_CURL_SETOPT = '[ERROR]: curl_setopt_array';
+   const ERROR_CURL_EXEC = '[ERROR]: curl_exec';
 
    private $ch;
+   private string $downloadsDirectory;
 
-   private function setOptions() : bool
+   static private function CheckCurlSetopt(bool $p_result)
+   {
+      if (!$p_result)
+         throw new \Exception(self::ERROR_CURL_SETOPT);
+   }
+
+   private function setCommonOptions() : bool
    {
       curl_reset($this->ch);
       $options = array(
          CURLOPT_CAINFO => Constants::APP_PATH . 'cacert.pem',
          CURLOPT_HEADER => false,
-         CURLOPT_RETURNTRANSFER => 1
+         CURLOPT_RETURNTRANSFER => true
       );
 
       return curl_setopt_array($this->ch, $options);
    }
 
-   public function __construct($p_curlHandle)
+   public function __construct(
+      $p_curlHandle,
+      string $p_downloadsDirectory = Constants::DOWNLOADS_PATH
+   )
    {
       $this->ch = $p_curlHandle;
+      $this->downloadsDirectory = $p_downloadsDirectory;
 
-      if (!$this->setOptions())
-         throw new \Exception(self::ERROR_CURL_SETOPT);
-  }
+      self::CheckCurlSetopt($this->setCommonOptions());
+   }
+
+   public function DownloadFile(string $p_fileUrl, string $p_fileName)
+   {
+      $fullFileName = $this->downloadsDirectory . $p_fileName;
+
+      /**
+       * Upon failure, an E_WARNING is emitted.
+       */
+      $binaryFilePointer = fopen($fullFileName, "wb");
+
+      $options = array(
+         CURLOPT_URL => $p_fileUrl,
+         CURLOPT_FILE => $binaryFilePointer
+      );
+
+      self::CheckCurlSetopt(curl_setopt_array($this->ch, $options));
+
+      curl_exec($this->ch);
+
+      if(curl_error($this->ch))
+         new \Exception(self::ERROR_CURL_EXEC);
+
+
+      fclose($binaryFilePointer);
+   }
 }

@@ -29,5 +29,9 @@ print_r($projectListArray);
 $ch = curl_init();
 
 $fileDownloaderCurlWrapper = new FileDownloaderCurlWrapper($ch);
+$fileDownloaderCurlWrapper->DownloadFile(
+   'https://www.sourcecodester.com/sites/default/files/download/pushpam02/MyGym.zip',
+   'MyGym.zip'
+);
 
 curl_close($ch);
