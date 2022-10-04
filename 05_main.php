@@ -2,7 +2,7 @@
 
 use App\ProjectListScraper;
 use App\ProjectSourcesDownloader;
-use App\FileDownloaderCurlWrapper;
+use App\DownloadFileCurlWrapper;
 
 spl_autoload_register();
 
@@ -26,6 +26,8 @@ $projectListArray = $projectListScraper->GetProjectListArray();
 print_r($projectListArray);
 */
 
+// ("24 File download works")
+/*
 $ch = curl_init();
 
 $fileDownloaderCurlWrapper = new FileDownloaderCurlWrapper($ch);
@@ -35,3 +37,15 @@ $fileDownloaderCurlWrapper->DownloadFile(
 );
 
 curl_close($ch);
+*/
+
+$ch = curl_init();
+
+$downloadFileCurlWrapper = new DownloadFileCurlWrapper($ch);
+$downloadFileCurlWrapper->downloadFile(
+   'https://www.sourcecodester.com/sites/default/files/download/pushpam02/MyGym.zip',
+   'MyGym.zip'
+);
+
+curl_close($ch);
+

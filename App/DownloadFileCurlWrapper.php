@@ -2,7 +2,7 @@
 
 namespace App;
 
-class FileDownloaderCurlWrapper
+class DownloadFileCurlWrapper
 {
    const ERROR_CURL_SETOPT = '[ERROR]: curl_setopt_array';
    const ERROR_CURL_EXEC = '[ERROR]: curl_exec';
@@ -39,7 +39,7 @@ class FileDownloaderCurlWrapper
       self::CheckCurlSetopt($this->setCommonOptions());
    }
 
-   public function DownloadFile(string $p_fileUrl, string $p_fileName)
+   public function downloadFile(string $p_fileUrl, string $p_fileName)
    {
       $fullFileName = $this->downloadsDirectory . $p_fileName;
 
