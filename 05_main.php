@@ -3,6 +3,7 @@
 use App\ProjectListScraper;
 use App\ProjectSourcesDownloader;
 use App\DownloadFileCurlWrapper;
+use App\ProjectListPageParser;
 
 spl_autoload_register();
 
@@ -52,6 +53,8 @@ $downloadFileCurlWrapper->downloadFile(
 curl_close($ch);
 */
 
+// ("27 Add interfaces and ProjectListPageParser.php")
+/*
 $ch = curl_init();
 
 $downloadFileCurlWrapper = new DownloadFileCurlWrapper($ch);
@@ -61,3 +64,8 @@ $downloadFileCurlWrapper->downloadFile(
 );
 
 curl_close($ch);
+*/
+
+$projectListPageHtml = '';
+$projectListPageParser = new ProjectListPageParser($projectListPageHtml);
+print_r($projectListPageParser->GetProjectListJsonArray());
