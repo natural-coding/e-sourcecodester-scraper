@@ -67,6 +67,13 @@ $downloadFileCurlWrapper->downloadFile(
 curl_close($ch);
 */
 
+// ("29 Example HTML ProjectList data")
+/*
+$projectListPageHtml = file_get_contents(Constants::PROJECT_LIST_DATA_DEBUG_PATH . 'example-ProjectList-page0.html');
+$projectListPageParser = new ProjectListPageParser($projectListPageHtml);
+print_r($projectListPageParser->GetProjectListJsonArray());
+*/
+
 $projectListPageHtml = file_get_contents(Constants::PROJECT_LIST_DATA_DEBUG_PATH . 'example-ProjectList-page0.html');
 $projectListPageParser = new ProjectListPageParser($projectListPageHtml);
 print_r($projectListPageParser->GetProjectListJsonArray());

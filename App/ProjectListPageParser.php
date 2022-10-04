@@ -1,5 +1,11 @@
 <?php
 
+namespace App\ProjectListPageParser;
+class Constants
+{
+   const URI_AND_PROJECT_TITLE_REGEX = '/<h2 class="node__title title">\s+<a[\s.]+href="(?<Uri>[^"]+)".+<span[^>]+>(?<ProjectTitle>.+)<\/span>\s+<\/a>/';
+}
+
 namespace App;
 
 use Interfaces\GetProjectListInterface;
@@ -11,20 +17,16 @@ class ProjectListPageParser implements GetProjectListInterface
    static private function parseHtmlIntoJsonArray(string $p_ProjectListPageHtml) : array
    {
       $outJsonArray = [];
+      $matchesArray = [];
 
-      $projectData = new \stdClass();
+      preg_match_all(
+         '/<h2 class="node__title title">\s+<a[\s.]+href="(?<Uri>[^"]+)".+<span[^>]+>(?<ProjectTitle>.+)<\/span>\s+<\/a>/',
+         $p_ProjectListPageHtml,
+         $matchesArray
+      );
 
-      $projectData->id = trim('15627');
-      $projectData->title = trim('Web-Based Student Clearance System in PHP Free Source Code');
-
-      array_push($outJsonArray,$projectData);
-
-      $projectData = new \stdClass();
-      
-      $projectData->id = trim('15688');
-      $projectData->title = trim('Canteen Management System Project Source Code in PHP Free Download');
-
-      array_push($outJsonArray,$projectData);      
+      print_r($matchesArray);
+      die;
 
       return $outJsonArray;
    }
