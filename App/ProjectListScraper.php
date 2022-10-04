@@ -2,9 +2,10 @@
 
 namespace App;
 
-use App\Constants;
+use Constants;
+use Interfaces\GetProjectListInterface;
 
-class ProjectListScraper
+class ProjectListScraper implements GetProjectListInterface;
 {
    private array $projectListJsonArray;
 
@@ -35,7 +36,7 @@ class ProjectListScraper
       $this->projectListJsonArray = self::ExtratStringIntoJsonArray($data);
    }
 
-   public function GetProjectListArray() : array
+   public function GetProjectListJsonArray() : array
    {
       return $this->projectListJsonArray;
    }

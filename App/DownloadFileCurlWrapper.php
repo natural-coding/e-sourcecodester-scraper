@@ -1,8 +1,11 @@
 <?php
 
+
 namespace App;
 
-class DownloadFileCurlWrapper
+use Interfaces\DownloadFileInterface;
+
+class DownloadFileCurlWrapper implements DownloadFileInterface
 {
    const ERROR_CURL_SETOPT = '[ERROR]: curl_setopt_array';
    const ERROR_CURL_EXEC = '[ERROR]: curl_exec';

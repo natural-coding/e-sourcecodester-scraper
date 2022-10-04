@@ -39,6 +39,8 @@ $fileDownloaderCurlWrapper->DownloadFile(
 curl_close($ch);
 */
 
+// ("26 rename to DownloadFileCurlWrapper.php")
+/*
 $ch = curl_init();
 
 $downloadFileCurlWrapper = new DownloadFileCurlWrapper($ch);
@@ -48,4 +50,14 @@ $downloadFileCurlWrapper->downloadFile(
 );
 
 curl_close($ch);
+*/
 
+$ch = curl_init();
+
+$downloadFileCurlWrapper = new DownloadFileCurlWrapper($ch);
+$downloadFileCurlWrapper->downloadFile(
+   'https://www.sourcecodester.com/sites/default/files/download/pushpam02/MyGym.zip',
+   'MyGym.zip'
+);
+
+curl_close($ch);
