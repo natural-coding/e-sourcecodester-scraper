@@ -4,6 +4,7 @@ use App\ProjectListScraper;
 use App\ProjectSourcesDownloader;
 use App\DownloadFileCurlWrapper;
 use App\ProjectListPageParser;
+use App\Constants;
 
 spl_autoload_register();
 
@@ -66,6 +67,6 @@ $downloadFileCurlWrapper->downloadFile(
 curl_close($ch);
 */
 
-$projectListPageHtml = '';
+$projectListPageHtml = file_get_contents(Constants::PROJECT_LIST_DATA_DEBUG_PATH . 'example-ProjectList-page0.html');
 $projectListPageParser = new ProjectListPageParser($projectListPageHtml);
 print_r($projectListPageParser->GetProjectListJsonArray());
