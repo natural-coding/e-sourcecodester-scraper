@@ -1,0 +1,26 @@
+Data:
+/php/15720/train-scheduler-app-using-php-oop-and-mysql-database-free-download.html
+
+Regex:
+#/php/(?<ProjectId>\d+)/#gm
+
+Explain
+[
+  [
+    {
+      "content": "/php/15720/",
+      "isParticipating": true,
+      "groupNum": 0,
+      "startPos": 0,
+      "endPos": 11
+    },
+    {
+      "content": "15720",
+      "isParticipating": true,
+      "groupNum": 1,
+      "groupName": "ProjectId",
+      "startPos": 5,
+      "endPos": 10
+    }
+  ]
+]
