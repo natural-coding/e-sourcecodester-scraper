@@ -74,6 +74,13 @@ $projectListPageParser = new ProjectListPageParser($projectListPageHtml);
 print_r($projectListPageParser->GetProjectListJsonArray());
 */
 
+// ("31 Extract Id Title Uri from html")
+/*
+$projectListPageHtml = file_get_contents(Constants::PROJECT_LIST_DATA_DEBUG_PATH . 'example-ProjectList-page0.html');
+$projectListPageParser = new ProjectListPageParser($projectListPageHtml);
+print_r($projectListPageParser->GetProjectListJsonArray());
+*/
+
 $projectListPageHtml = file_get_contents(Constants::PROJECT_LIST_DATA_DEBUG_PATH . 'example-ProjectList-page0.html');
 $projectListPageParser = new ProjectListPageParser($projectListPageHtml);
 print_r($projectListPageParser->GetProjectListJsonArray());

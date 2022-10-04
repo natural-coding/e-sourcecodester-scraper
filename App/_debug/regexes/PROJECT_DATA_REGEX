@@ -1,0 +1,292 @@
+Regex:
+#<article data-history-node-id="(?<ProjectId>\d+)".+about="(?<ProjectUri>[^"]+)"[\s\S]+?(?=<span)<span[^>]+>(?<ProjectTitle>.+)</span>#gm
+
+Note:
+Use greediness and lookahead
+
+Explanation (according to regex101.com):
+
+---
+- - content: |-
+      <article data-history-node-id="15720" role="article" about="/php/15720/train-scheduler-app-using-php-oop-and-mysql-database-free-download.html" class="node node--type-source-code node--promoted node--view-mode-teaser clearfix">
+      <div class="node-content">
+      <header>
+      <h2 class="node__title title">
+      <a href="/php/15720/train-scheduler-app-using-php-oop-and-mysql-database-free-download.html" rel="bookmark"><span class="field field--name-title field--type-string field--label-hidden">Train Scheduler App using PHP OOP and MYSQL Database Free Download</span>
+    isParticipating: true
+    groupNum: 0
+    startPos: 17477
+    endPos: 18030
+  - content: '15720'
+    isParticipating: true
+    groupNum: 1
+    groupName: ProjectId
+    startPos: 17508
+    endPos: 17513
+  - content: "/php/15720/train-scheduler-app-using-php-oop-and-mysql-database-free-download.html"
+    isParticipating: true
+    groupNum: 2
+    groupName: ProjectUri
+    startPos: 17537
+    endPos: 17619
+  - content: Train Scheduler App using PHP OOP and MYSQL Database Free Download
+    isParticipating: true
+    groupNum: 3
+    groupName: ProjectTitle
+    startPos: 17957
+    endPos: 18023
+- - content: |-
+      <article data-history-node-id="15627" role="article" about="/php/15627/web-based-student-clearance-system.html" class="node node--type-source-code node--promoted node--view-mode-teaser clearfix">
+      <div class="node-content">
+      <header>
+      <h2 class="node__title title">
+      <a href="/php/15627/web-based-student-clearance-system.html" rel="bookmark"><span class="field field--name-title field--type-string field--label-hidden">Web-Based Student Clearance System in PHP Free Source Code</span>
+    isParticipating: true
+    groupNum: 0
+    startPos: 20156
+    endPos: 20637
+  - content: '15627'
+    isParticipating: true
+    groupNum: 1
+    groupName: ProjectId
+    startPos: 20187
+    endPos: 20192
+  - content: "/php/15627/web-based-student-clearance-system.html"
+    isParticipating: true
+    groupNum: 2
+    groupName: ProjectUri
+    startPos: 20216
+    endPos: 20266
+  - content: Web-Based Student Clearance System in PHP Free Source Code
+    isParticipating: true
+    groupNum: 3
+    groupName: ProjectTitle
+    startPos: 20572
+    endPos: 20630
+- - content: |-
+      <article data-history-node-id="15688" role="article" about="/php/15688/canteen-management-system-project-source-code-php.html" class="node node--type-source-code node--promoted node--view-mode-teaser clearfix">
+      <div class="node-content">
+      <header>
+      <h2 class="node__title title">
+      <a href="/php/15688/canteen-management-system-project-source-code-php.html" rel="bookmark"><span class="field field--name-title field--type-string field--label-hidden">Canteen Management System Project Source Code in PHP Free Download</span>
+    isParticipating: true
+    groupNum: 0
+    startPos: 23204
+    endPos: 23723
+  - content: '15688'
+    isParticipating: true
+    groupNum: 1
+    groupName: ProjectId
+    startPos: 23235
+    endPos: 23240
+  - content: "/php/15688/canteen-management-system-project-source-code-php.html"
+    isParticipating: true
+    groupNum: 2
+    groupName: ProjectUri
+    startPos: 23264
+    endPos: 23329
+  - content: Canteen Management System Project Source Code in PHP Free Download
+    isParticipating: true
+    groupNum: 3
+    groupName: ProjectTitle
+    startPos: 23650
+    endPos: 23716
+- - content: |-
+      <article data-history-node-id="15697" role="article" about="/php/15697/school-fees-management-system-project-php-and-codeigniter-free-source-code.html" class="node node--type-source-code node--promoted node--view-mode-teaser clearfix">
+      <div class="node-content">
+      <header>
+      <h2 class="node__title title">
+      <a href="/php/15697/school-fees-management-system-project-php-and-codeigniter-free-source-code.html" rel="bookmark"><span class="field field--name-title field--type-string field--label-hidden">School Fees Management System Project in PHP and CodeIgniter Free Source Code</span>
+    isParticipating: true
+    groupNum: 0
+    startPos: 25804
+    endPos: 26384
+  - content: '15697'
+    isParticipating: true
+    groupNum: 1
+    groupName: ProjectId
+    startPos: 25835
+    endPos: 25840
+  - content: "/php/15697/school-fees-management-system-project-php-and-codeigniter-free-source-code.html"
+    isParticipating: true
+    groupNum: 2
+    groupName: ProjectUri
+    startPos: 25864
+    endPos: 25954
+  - content: School Fees Management System Project in PHP and CodeIgniter Free Source
+      Code
+    isParticipating: true
+    groupNum: 3
+    groupName: ProjectTitle
+    startPos: 26300
+    endPos: 26377
+- - content: |-
+      <article data-history-node-id="15689" role="article" about="/php/15689/food-ordering-management-system-php-and-mysql-free-source-code.html" class="node node--type-source-code node--promoted node--view-mode-teaser clearfix">
+      <div class="node-content">
+      <header>
+      <h2 class="node__title title">
+      <a href="/php/15689/food-ordering-management-system-php-and-mysql-free-source-code.html" rel="bookmark"><span class="field field--name-title field--type-string field--label-hidden">Food Ordering Management System in PHP and MySQL Free Source Code</span>
+    isParticipating: true
+    groupNum: 0
+    startPos: 29125
+    endPos: 29669
+  - content: '15689'
+    isParticipating: true
+    groupNum: 1
+    groupName: ProjectId
+    startPos: 29156
+    endPos: 29161
+  - content: "/php/15689/food-ordering-management-system-php-and-mysql-free-source-code.html"
+    isParticipating: true
+    groupNum: 2
+    groupName: ProjectUri
+    startPos: 29185
+    endPos: 29263
+  - content: Food Ordering Management System in PHP and MySQL Free Source Code
+    isParticipating: true
+    groupNum: 3
+    groupName: ProjectTitle
+    startPos: 29597
+    endPos: 29662
+- - content: |-
+      <article data-history-node-id="15683" role="article" about="/php/15683/online-birth-certificate-management-system-php-free-download.html" class="node node--type-source-code node--promoted node--view-mode-teaser clearfix">
+      <div class="node-content">
+      <header>
+      <h2 class="node__title title">
+      <a href="/php/15683/online-birth-certificate-management-system-php-free-download.html" rel="bookmark"><span class="field field--name-title field--type-string field--label-hidden">Online Birth Certificate Management System in PHP Free Download</span>
+    isParticipating: true
+    groupNum: 0
+    startPos: 31805
+    endPos: 32343
+  - content: '15683'
+    isParticipating: true
+    groupNum: 1
+    groupName: ProjectId
+    startPos: 31836
+    endPos: 31841
+  - content: "/php/15683/online-birth-certificate-management-system-php-free-download.html"
+    isParticipating: true
+    groupNum: 2
+    groupName: ProjectUri
+    startPos: 31865
+    endPos: 31941
+  - content: Online Birth Certificate Management System in PHP Free Download
+    isParticipating: true
+    groupNum: 3
+    groupName: ProjectTitle
+    startPos: 32273
+    endPos: 32336
+- - content: |-
+      <article data-history-node-id="15667" role="article" about="/php/15667/online-diagnostic-lab-management-system-using-php-and-mysql-free-download.html" class="node node--type-source-code node--promoted node--view-mode-teaser clearfix">
+      <div class="node-content">
+      <header>
+      <h2 class="node__title title">
+      <a href="/php/15667/online-diagnostic-lab-management-system-using-php-and-mysql-free-download.html" rel="bookmark"><span class="field field--name-title field--type-string field--label-hidden">Online Diagnostic Lab Management System using PHP and MySQL Free Download</span>
+    isParticipating: true
+    groupNum: 0
+    startPos: 35005
+    endPos: 35579
+  - content: '15667'
+    isParticipating: true
+    groupNum: 1
+    groupName: ProjectId
+    startPos: 35036
+    endPos: 35041
+  - content: "/php/15667/online-diagnostic-lab-management-system-using-php-and-mysql-free-download.html"
+    isParticipating: true
+    groupNum: 2
+    groupName: ProjectUri
+    startPos: 35065
+    endPos: 35154
+  - content: Online Diagnostic Lab Management System using PHP and MySQL Free Download
+    isParticipating: true
+    groupNum: 3
+    groupName: ProjectTitle
+    startPos: 35499
+    endPos: 35572
+- - content: |-
+      <article data-history-node-id="15653" role="article" about="/php/15653/best-student-result-management-system-project-source-code-php-and-mysql-free-download" class="node node--type-source-code node--promoted node--view-mode-teaser clearfix">
+      <div class="node-content">
+      <header>
+      <h2 class="node__title title">
+      <a href="/php/15653/best-student-result-management-system-project-source-code-php-and-mysql-free-download" rel="bookmark"><span class="field field--name-title field--type-string field--label-hidden">Best Student Result Management System Project source code in PHP and MySQL Free Download</span>
+    isParticipating: true
+    groupNum: 0
+    startPos: 38184
+    endPos: 38787
+  - content: '15653'
+    isParticipating: true
+    groupNum: 1
+    groupName: ProjectId
+    startPos: 38215
+    endPos: 38220
+  - content: "/php/15653/best-student-result-management-system-project-source-code-php-and-mysql-free-download"
+    isParticipating: true
+    groupNum: 2
+    groupName: ProjectUri
+    startPos: 38244
+    endPos: 38340
+  - content: Best Student Result Management System Project source code in PHP and
+      MySQL Free Download
+    isParticipating: true
+    groupNum: 3
+    groupName: ProjectTitle
+    startPos: 38692
+    endPos: 38780
+- - content: |-
+      <article data-history-node-id="15624" role="article" about="/php/15624/simple-task-managing-system-php-mysqli-free-source-code.html" class="node node--type-source-code node--promoted node--view-mode-teaser clearfix">
+      <div class="node-content">
+      <header>
+      <h2 class="node__title title">
+      <a href="/php/15624/simple-task-managing-system-php-mysqli-free-source-code.html" rel="bookmark"><span class="field field--name-title field--type-string field--label-hidden">Simple Task Managing System in PHP With MySQLi Free Source Code</span>
+    isParticipating: true
+    groupNum: 0
+    startPos: 41551
+    endPos: 42079
+  - content: '15624'
+    isParticipating: true
+    groupNum: 1
+    groupName: ProjectId
+    startPos: 41582
+    endPos: 41587
+  - content: "/php/15624/simple-task-managing-system-php-mysqli-free-source-code.html"
+    isParticipating: true
+    groupNum: 2
+    groupName: ProjectUri
+    startPos: 41611
+    endPos: 41682
+  - content: Simple Task Managing System in PHP With MySQLi Free Source Code
+    isParticipating: true
+    groupNum: 3
+    groupName: ProjectTitle
+    startPos: 42009
+    endPos: 42072
+- - content: |-
+      <article data-history-node-id="15586" role="article" about="/php/15586/gas-agency-management-system-project-php-free-download-source-code.html" class="node node--type-source-code node--promoted node--view-mode-teaser clearfix">
+      <div class="node-content">
+      <header>
+      <h2 class="node__title title">
+      <a href="/php/15586/gas-agency-management-system-project-php-free-download-source-code.html" rel="bookmark"><span class="field field--name-title field--type-string field--label-hidden">Gas Agency Management System Project in PHP Free Download with Free Source Code </span>
+    isParticipating: true
+    groupNum: 0
+    startPos: 44076
+    endPos: 44643
+  - content: '15586'
+    isParticipating: true
+    groupNum: 1
+    groupName: ProjectId
+    startPos: 44107
+    endPos: 44112
+  - content: "/php/15586/gas-agency-management-system-project-php-free-download-source-code.html"
+    isParticipating: true
+    groupNum: 2
+    groupName: ProjectUri
+    startPos: 44136
+    endPos: 44218
+  - content: 'Gas Agency Management System Project in PHP Free Download with Free
+      Source Code '
+    isParticipating: true
+    groupNum: 3
+    groupName: ProjectTitle
+    startPos: 44556
+    endPos: 44636

@@ -6,10 +6,11 @@ use Interfaces\GetProjectListInterface;
 
 class ProjectListPageParser implements GetProjectListInterface
 {
-   const URI_AND_PROJECT_TITLE_REGEX = '#<h2 class="node__title title">\s+<a[\s.]+href="(?<Uri>[^"]+)".+<span[^>]+>(?<ProjectTitle>.+)</span>\s+</a>#';
-   const GET_PROJECT_ID_FROM_URI_REGEX = '#/php/(?<ProjectId>\d+)/#';
-
-   const ERROR_URI_PROJECT_TITLE_COUNT_MISMATCH = '[ERROR]: Uri and ProjectTitle mismatch!';
+   /**
+    * Regex contains the following groups:
+    * (?<ProjectId>), (?<ProjectUri>), (?<ProjectTitle>)
+    */
+   const PROJECT_DATA_REGEX = '#<article data-history-node-id="(?<ProjectId>\d+)".+about="(?<ProjectUri>[^"]+)"[\s\S]+?(?=<span)<span[^>]+>(?<ProjectTitle>.+)</span>#';
 
    private array $projectListJsonArray;
 
@@ -19,29 +20,21 @@ class ProjectListPageParser implements GetProjectListInterface
       $matchesArray = [];
 
       /**
-       * There are two groups in regex: (?<Uri>) and (?<ProjectTitle>)
+       * Regex contains the following groups:
+       * (?<ProjectId>), (?<ProjectUri>), (?<ProjectTitle>)
        */
       preg_match_all(
-         self::URI_AND_PROJECT_TITLE_REGEX,
+         self::PROJECT_DATA_REGEX,
          $p_ProjectListPageHtml,
          $matchesArray
       );
 
-      if (count($matchesArray['Uri']) != count($matchesArray['ProjectTitle']))
-         throw new \Exception(self::ERROR_URI_PROJECT_TITLE_COUNT_MISMATCH);
-
-      foreach($matchesArray['Uri'] as $i => $uriVal)
+      foreach($matchesArray['ProjectId'] as $i => $idVal)
       {
-         $matchesArrayId = [];
-         /**
-          * There is one group in regex: (?<ProjectId>)
-          */
-         preg_match(self::GET_PROJECT_ID_FROM_URI_REGEX,$uriVal,$matchesArrayId);
-
          $projectData = new \stdClass();
-         $projectData->id = $matchesArrayId['ProjectId'];
+         $projectData->id = $idVal;
          $projectData->title = $matchesArray['ProjectTitle'][$i];
-         $projectData->uri = $uriVal;
+         $projectData->uri = $matchesArray['ProjectUri'][$i];
 
          array_push($outJsonArray,$projectData);
       }
