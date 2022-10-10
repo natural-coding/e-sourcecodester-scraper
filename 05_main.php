@@ -1,86 +1,15 @@
 <?php
 
-use App\ProjectListScraper;
-use App\ProjectSourcesDownloader;
 use App\DownloadFileCurlWrapper;
-use App\ProjectListPageParser;
+use App\ProjectListWebPageParser;
 use App\Constants;
 
 spl_autoload_register();
 
-// ("15 ProjectListScraper ProjectSourcesDownloader stubs")
-/*
-use App\ProjectListScraper;
-use App\ProjectSourcesDownloader;
+// ("34 rename ProjectListPageParser.php to ProjectListWebPageParser.php")
 
-spl_autoload_register();
+$projectListWebPageHtml = file_get_contents(Constants::PROJECT_LIST_DATA_DEBUG_PATH . 'example-ProjectList-page0.html');
+$projectListWebPageParser = new ProjectListWebPageParser($projectListWebPageHtml);
+print_r($projectListWebPageParser->GetProjectListJsonArray());
 
-$projectListScraper =  new ProjectListScraper();
-$projectSourcesDownloader = new ProjectSourcesDownloader();
-*/
 
-// ("21 Add Id to project data")
-/*
-$projectListScraper =  new ProjectListScraper();
-
-$projectListArray = $projectListScraper->GetProjectListArray();
-
-print_r($projectListArray);
-*/
-
-// ("24 File download works")
-/*
-$ch = curl_init();
-
-$fileDownloaderCurlWrapper = new FileDownloaderCurlWrapper($ch);
-$fileDownloaderCurlWrapper->DownloadFile(
-   'https://www.sourcecodester.com/sites/default/files/download/pushpam02/MyGym.zip',
-   'MyGym.zip'
-);
-
-curl_close($ch);
-*/
-
-// ("26 rename to DownloadFileCurlWrapper.php")
-/*
-$ch = curl_init();
-
-$downloadFileCurlWrapper = new DownloadFileCurlWrapper($ch);
-$downloadFileCurlWrapper->downloadFile(
-   'https://www.sourcecodester.com/sites/default/files/download/pushpam02/MyGym.zip',
-   'MyGym.zip'
-);
-
-curl_close($ch);
-*/
-
-// ("27 Add interfaces and ProjectListPageParser.php")
-/*
-$ch = curl_init();
-
-$downloadFileCurlWrapper = new DownloadFileCurlWrapper($ch);
-$downloadFileCurlWrapper->downloadFile(
-   'https://www.sourcecodester.com/sites/default/files/download/pushpam02/MyGym.zip',
-   'MyGym.zip'
-);
-
-curl_close($ch);
-*/
-
-// ("29 Example HTML ProjectList data")
-/*
-$projectListPageHtml = file_get_contents(Constants::PROJECT_LIST_DATA_DEBUG_PATH . 'example-ProjectList-page0.html');
-$projectListPageParser = new ProjectListPageParser($projectListPageHtml);
-print_r($projectListPageParser->GetProjectListJsonArray());
-*/
-
-// ("31 Extract Id Title Uri from html")
-/*
-$projectListPageHtml = file_get_contents(Constants::PROJECT_LIST_DATA_DEBUG_PATH . 'example-ProjectList-page0.html');
-$projectListPageParser = new ProjectListPageParser($projectListPageHtml);
-print_r($projectListPageParser->GetProjectListJsonArray());
-*/
-
-$projectListPageHtml = file_get_contents(Constants::PROJECT_LIST_DATA_DEBUG_PATH . 'example-ProjectList-page0.html');
-$projectListPageParser = new ProjectListPageParser($projectListPageHtml);
-print_r($projectListPageParser->GetProjectListJsonArray());

@@ -4,7 +4,7 @@ namespace App;
 
 use Interfaces\GetProjectListInterface;
 
-class ProjectListPageParser implements GetProjectListInterface
+class ProjectListWebPageParser implements GetProjectListInterface
 {
    /**
     * Regex contains the following groups:
