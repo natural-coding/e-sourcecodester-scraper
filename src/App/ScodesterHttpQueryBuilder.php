@@ -16,8 +16,16 @@ class ScodesterHttpQueryBuilder extends HttpQueryBuilder
       return $this->getSiteUrl();
    }
 
-   public function getProjectListQuery() : string
+   public function getProjectListWebPageQuery(int $p_pageIndex) : string
    {
-      return $this->getSiteUrl();
+      $urls=<<<ENDMARKER
+https://www.sourcecodester.com/php?page=0
+https://www.sourcecodester.com/php?page=1
+https://www.sourcecodester.com/php?page=2
+https://www.sourcecodester.com/php?page=3
+ENDMARKER;
+      $urlsArr = explode(PHP_EOL,$urls);
+
+      return $urlsArr[$p_pageIndex % count($urlsArr)];
    }
 }

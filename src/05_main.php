@@ -2,7 +2,6 @@
 
 require_once __DIR__ . '/vendor/autoload.php';
 
-
 use App\DownloadFileCurlWrapper;
 use App\ProjectListWebPageParser;
 use App\Constants;
@@ -17,7 +16,13 @@ $projectListWebPageParser = new ProjectListWebPageParser($projectListWebPageHtml
 print_r($projectListWebPageParser->GetProjectListJsonArray());
 */
 
-
+// ("38 Use Composer for case sensitive autoloading")
+/*
 $scodesterHttpQueryBuilder = new ScodesterHttpQueryBuilder('https://www.sourcecodester.com/');
 print $scodesterHttpQueryBuilder->getDownloadQuery();
 print $scodesterHttpQueryBuilder->getProjectListQuery();
+*/
+
+$scodesterHttpQueryBuilder = new ScodesterHttpQueryBuilder('https://www.sourcecodester.com/');
+for($i=0; $i<3; ++$i)
+   print $scodesterHttpQueryBuilder->getProjectListWebPageQuery($i) . PHP_EOL;
