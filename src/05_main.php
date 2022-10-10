@@ -2,10 +2,11 @@
 
 require_once __DIR__ . '/vendor/autoload.php';
 
-use App\DownloadFileCurlWrapper;
-use App\ProjectListWebPageParser;
 use App\Constants;
 use App\ScodesterHttpQueryBuilder;
+use App\RequestPageCurlWrapper;
+use App\ProjectListWebPageParser;
+use App\DownloadFileCurlWrapper;
 
 
 // ("34 rename ProjectListPageParser.php to ProjectListWebPageParser.php")
@@ -23,6 +24,27 @@ print $scodesterHttpQueryBuilder->getDownloadQuery();
 print $scodesterHttpQueryBuilder->getProjectListQuery();
 */
 
+// ("39 getProjectListWebPageQuery test output")
+/*
 $scodesterHttpQueryBuilder = new ScodesterHttpQueryBuilder('https://www.sourcecodester.com/');
 for($i=0; $i<3; ++$i)
    print $scodesterHttpQueryBuilder->getProjectListWebPageQuery($i) . PHP_EOL;
+*/
+
+$projectListAllArray = [];
+
+for($i=0; $i<3; ++$i)
+{
+   $scodesterHttpQueryBuilder = new ScodesterHttpQueryBuilder('https://www.sourcecodester.com/');
+   $url = $scodesterHttpQueryBuilder->getProjectListWebPageQuery($i);
+
+   $requestPageCurlWrapper = new RequestPageCurlWrapper();
+   $response = $requestPageCurlWrapper->sendRequest($url);
+
+   $projectListWebPageParser = new ProjectListWebPageParser($response);
+   $projectListArray = $projectListWebPageParser->GetProjectListJsonArray();
+
+   $projectListAllArray = array_merge($projectListAllArray,$projectListArray);
+}
+
+print_r($projectListAllArray);
