@@ -1,0 +1,10 @@
+{
+  "name": "natcod/scodester-scraper",
+  "description": "Download interesting PHP sources from https://www.sourcecodester.com/",
+  "autoload": {
+    "psr-4": {
+      "App\\": "app",
+      "Framework\\": "framework"
+    }
+  }
+}

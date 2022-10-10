@@ -2,9 +2,9 @@
 
 namespace App;
 
-require_once(Constants::FRAMEWORK_PATH . 'HttpQueryBuilder.php');
+use \Framework\HttpQueryBuilder;
 
-class ScodesterHttpQueryBuilder extends \Framework\HttpQueryBuilder
+class ScodesterHttpQueryBuilder extends HttpQueryBuilder
 {
    public function __construct(string $p_siteUrl)
    {

@@ -1,6 +1,7 @@
 <?php
 
-namespace Interfaces;
+namespace App\Interfaces;
+
 interface GetProjectListInterface
 {
    public function GetProjectListJsonArray() : array;
