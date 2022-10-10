@@ -23,7 +23,7 @@ class DownloadFileCurlWrapper implements DownloadFileInterface
    {
       curl_reset($this->ch);
       $options = array(
-         CURLOPT_CAINFO => Constants::APP_PATH . 'cacert.pem',
+         CURLOPT_CAINFO => Constants::CONFIG_PATH . 'cacert.pem',
          CURLOPT_HEADER => false,
          CURLOPT_RETURNTRANSFER => true
       );
