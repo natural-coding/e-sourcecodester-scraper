@@ -4,5 +4,5 @@ namespace App\Interfaces;
 
 interface GetProjectListInterface
 {
-   public function GetProjectListJsonArray() : array;
+   public function getProjectListJsonArray() : array;
 }

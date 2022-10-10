@@ -45,7 +45,7 @@ class ProjectListWebPageParser implements Interfaces\GetProjectListInterface
       $this->projectListJsonArray = self::parseHtmlIntoJsonArray($p_ProjectListPageHtml);
    }
 
-   public function GetProjectListJsonArray() : array
+   public function getProjectListJsonArray() : array
    {
       return $this->projectListJsonArray;
    }

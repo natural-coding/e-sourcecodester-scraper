@@ -42,7 +42,7 @@ for($i=0; $i<3; ++$i)
    $response = $requestPageCurlWrapper->sendRequest($url);
 
    $projectListWebPageParser = new ProjectListWebPageParser($response);
-   $projectListArray = $projectListWebPageParser->GetProjectListJsonArray();
+   $projectListArray = $projectListWebPageParser->getProjectListJsonArray();
 
    $projectListAllArray = array_merge($projectListAllArray,$projectListArray);
 }
