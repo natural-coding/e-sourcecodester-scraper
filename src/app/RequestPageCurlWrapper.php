@@ -9,10 +9,18 @@ class RequestPageCurlWrapper extends CurlWrapperBase implements Interfaces\Reque
    {
       parent::__construct($p_curlHandle);
    }
-   
+
    function sendRequest(string $p_Url) : string
    {
-      print __FUNCTION__ . PHP_EOL;
-      return __FUNCTION__;
+      $res = curl_setopt($this->getCurlHandle(),CURLOPT_URL,$p_Url);
+      self::CheckCurlSetopt($res);
+
+      $response = curl_exec($this->getCurlHandle());
+
+      $errorMessage = curl_error($this->getCurlHandle());
+      if($errorMessage)
+         throw new \Exception(self::ERROR_CURL_EXEC . "($errorMessage)");
+
+      return $response;
    }
 }

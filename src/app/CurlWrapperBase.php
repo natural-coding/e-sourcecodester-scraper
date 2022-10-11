@@ -33,7 +33,7 @@ class CurlWrapperBase
    {
       curl_reset($this->curlHandle);
       $options = array(
-         CURLOPT_CAINFO => Constants::APP_PATH . 'cacert.pem',
+         CURLOPT_CAINFO => Constants::CONFIG_PATH . 'cacert.pem',
          CURLOPT_HEADER => false,
          CURLOPT_RETURNTRANSFER => true
       );

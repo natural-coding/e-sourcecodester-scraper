@@ -56,4 +56,6 @@ print_r($projectListAllArray);
 $curlWrapperFactory = new CurlWrapperFactory();
 $requestPageCurlWrapper = $curlWrapperFactory->createRequestPageCurlWrapper();
 
-$response = $requestPageCurlWrapper->sendRequest('');
+$response = $requestPageCurlWrapper->sendRequest('https://www.sourcecodester.com/php?page=1');
+
+var_dump($response);

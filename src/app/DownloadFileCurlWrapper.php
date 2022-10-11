@@ -61,7 +61,7 @@ class DownloadFileCurlWrapper implements DownloadFileInterface
       curl_exec($this->ch);
 
       if(curl_error($this->ch))
-         new \Exception(self::ERROR_CURL_EXEC);
+         throw new \Exception(self::ERROR_CURL_EXEC);
 
 
       fclose($binaryFilePointer);
