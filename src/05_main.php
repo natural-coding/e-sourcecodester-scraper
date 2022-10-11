@@ -62,5 +62,14 @@ $response = $requestPageCurlWrapper->sendRequest('https://www.sourcecodester.com
 var_dump($response);
 */
 
-$curlWrapperFactory = new CurlWrapperFactory();
+/**
+ * Let's violate something ;-)
+ */
+$methodsThatReturnTestDouble = ['createRequestPageCurlWrapper'];
+//$methodsThatReturnTestDouble = [];
+$curlWrapperFactory = new CurlWrapperFactory($methodsThatReturnTestDouble);
+
 $requestPageCurlWrapper = $curlWrapperFactory->createRequestPageCurlWrapper();
+$response = $requestPageCurlWrapper->sendRequest('https://www.sourcecodester.com/php?page=1');
+
+print substr($response,0,130);

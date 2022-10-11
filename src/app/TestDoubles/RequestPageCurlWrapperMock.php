@@ -2,15 +2,16 @@
 
 namespace App\TestDoubles;
 
+use App\Constants;
+
 class RequestPageCurlWrapperMock implements \App\Interfaces\RequestPageInterface
 {
-   public function __construct()
+   public function __construct($p_curlHandle)
    {
-      print __FUNCTION__;
    }
 
    function sendRequest(string $p_Url) : string
    {
-      return __FUNCTION__;
+      return file_get_contents(Constants::PROJECT_LIST_DATA_DEBUG_PATH . 'example-ProjectList-page0.html');
    }   
 }
