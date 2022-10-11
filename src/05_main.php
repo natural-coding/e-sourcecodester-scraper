@@ -7,6 +7,7 @@ use App\ScodesterHttpQueryBuilder;
 use App\RequestPageCurlWrapper;
 use App\ProjectListWebPageParser;
 use App\DownloadFileCurlWrapper;
+use App\Factories\CurlWrapperFactory;
 
 
 // ("34 rename ProjectListPageParser.php to ProjectListWebPageParser.php")
@@ -31,6 +32,8 @@ for($i=0; $i<3; ++$i)
    print $scodesterHttpQueryBuilder->getProjectListWebPageQuery($i) . PHP_EOL;
 */
 
+// ("40 Getting project list stub")
+/*
 $projectListAllArray = [];
 
 for($i=0; $i<3; ++$i)
@@ -48,3 +51,9 @@ for($i=0; $i<3; ++$i)
 }
 
 print_r($projectListAllArray);
+*/
+
+$curlWrapperFactory = new CurlWrapperFactory();
+$requestPageCurlWrapper = $curlWrapperFactory->createRequestPageCurlWrapper();
+
+$response = $requestPageCurlWrapper->sendRequest('');
