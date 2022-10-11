@@ -3,7 +3,7 @@
 namespace App;
 use App\CurlWrapperBase;
 
-class RequestPageCurlWrapper extends CurlWrapperBase implements Interfaces\RequestPageInterface
+class RequestPageCurlWrapper extends CurlWrapperBase implements \App\Interfaces\RequestPageInterface
 {
    public function __construct($p_curlHandle)
    {

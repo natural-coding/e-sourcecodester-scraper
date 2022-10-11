@@ -9,7 +9,6 @@ use App\ProjectListWebPageParser;
 use App\DownloadFileCurlWrapper;
 use App\Factories\CurlWrapperFactory;
 
-
 // ("34 rename ProjectListPageParser.php to ProjectListWebPageParser.php")
 /*
 $projectListWebPageHtml = file_get_contents(Constants::PROJECT_LIST_DATA_DEBUG_PATH . 'example-ProjectList-page0.html');
@@ -53,9 +52,15 @@ for($i=0; $i<3; ++$i)
 print_r($projectListAllArray);
 */
 
+// ("46 requestPage works")
+/*
 $curlWrapperFactory = new CurlWrapperFactory();
 $requestPageCurlWrapper = $curlWrapperFactory->createRequestPageCurlWrapper();
 
 $response = $requestPageCurlWrapper->sendRequest('https://www.sourcecodester.com/php?page=1');
 
 var_dump($response);
+*/
+
+$curlWrapperFactory = new CurlWrapperFactory();
+$requestPageCurlWrapper = $curlWrapperFactory->createRequestPageCurlWrapper();

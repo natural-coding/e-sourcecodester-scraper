@@ -23,6 +23,7 @@ class CurlWrapperFactory
 
    public function createRequestPageCurlWrapper() : RequestPageInterface
    {
-      return new RequestPageCurlWrapper($this->curlHandle);
+      //return new RequestPageCurlWrapper($this->curlHandle);
+      return new \App\TestDoubles\RequestPageCurlWrapperMock;
    }
 }
