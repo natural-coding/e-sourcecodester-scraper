@@ -62,9 +62,11 @@ $response = $requestPageCurlWrapper->sendRequest('https://www.sourcecodester.com
 var_dump($response);
 */
 
+// ("48 CurlWrapperFactory able to return TestDoubles")
 /**
  * Let's violate something ;-)
  */
+/*
 $methodsThatReturnTestDouble = ['createRequestPageCurlWrapper'];
 //$methodsThatReturnTestDouble = [];
 $curlWrapperFactory = new CurlWrapperFactory($methodsThatReturnTestDouble);
@@ -73,3 +75,32 @@ $requestPageCurlWrapper = $curlWrapperFactory->createRequestPageCurlWrapper();
 $response = $requestPageCurlWrapper->sendRequest('https://www.sourcecodester.com/php?page=1');
 
 print substr($response,0,130);
+*/
+
+//$methodsThatReturnTestDouble = ['createRequestPageCurlWrapper'];
+$methodsThatReturnTestDouble = [];
+$curlWrapperFactory = new CurlWrapperFactory($methodsThatReturnTestDouble);
+
+$requestPageCurlWrapper = $curlWrapperFactory->createRequestPageCurlWrapper();
+
+$projectListAllArray = [];
+
+for($pageNumQueryParam = 10; $pageNumQueryParam < 12; ++$pageNumQueryParam)
+{
+   $scodesterHttpQueryBuilder = new ScodesterHttpQueryBuilder('https://www.sourcecodester.com/');
+   $url = $scodesterHttpQueryBuilder->getProjectListWebPageQuery($pageNumQueryParam);
+
+   $response = $requestPageCurlWrapper->sendRequest($url);
+
+   $projectListWebPageParser = new ProjectListWebPageParser($response);
+   $projectListArray = $projectListWebPageParser->getProjectListJsonArray();
+
+   $projectListAllArray = array_merge($projectListAllArray,$projectListArray);
+
+   $randomAmountOfSeconds = random_int(3,7);
+   // $randomAmountOfSeconds = 0;
+   print $randomAmountOfSeconds . PHP_EOL;
+   sleep($randomAmountOfSeconds);
+}
+
+print_r($projectListAllArray);
