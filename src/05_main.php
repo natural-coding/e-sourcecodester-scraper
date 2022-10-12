@@ -10,8 +10,8 @@ use App\DownloadFileCurlWrapper;
 use App\Factories\CurlWrapperFactory;
 
 // ("51 CurlWrapperFactory useTestDoubles method")
-/*
-$useTestDoubles = true;
+
+/*$useTestDoubles = true;
 $curlWrapperFactory = new CurlWrapperFactory($useTestDoubles);
 // $curlWrapperFactory = new CurlWrapperFactory();
 
@@ -37,7 +37,8 @@ for($pageNumQueryParam = 0; $pageNumQueryParam < 2; ++$pageNumQueryParam)
    // sleep($randomAmountOfSeconds);
 }
 
-print_r($projectListAllArray);
+//print_r($projectListAllArray);
+print json_encode($projectListAllArray);
 */
 
 // ("52 getProjectListWebPageQuery works using sprintf!")
@@ -48,7 +49,14 @@ $url = $scodesterHttpQueryBuilder->getProjectListWebPageQuery(10);
 print $url;
 */
 
+// ("53 getDownloadQuery works")
+/*
 $scodesterHttpQueryBuilder = new ScodesterHttpQueryBuilder('https://www.sourcecodester.com/');
 $url = $scodesterHttpQueryBuilder->getDownloadQuery(15628);
 
 print $url;
+*/
+
+$projectListAllArray = json_decode(file_get_contents(Constants::PROJECT_LIST_DATA_DEBUG_PATH . 'output-projectListAllArray.txt'));
+
+print_r($projectListAllArray);
