@@ -57,6 +57,21 @@ $url = $scodesterHttpQueryBuilder->getDownloadQuery(15628);
 print $url;
 */
 
+// ("54 use output-projectListAllArray.txt for development")
+/*
 $projectListAllArray = json_decode(file_get_contents(Constants::PROJECT_LIST_DATA_DEBUG_PATH . 'output-projectListAllArray.txt'));
+
+print_r($projectListAllArray);
+*/
+
+$projectListAllArray = json_decode(file_get_contents(Constants::PROJECT_LIST_DATA_DEBUG_PATH . 'output-projectListAllArray.txt'));
+
+foreach($projectListAllArray as $projectsOnWebPageArray)
+   foreach($projectsOnWebPageArray as $projectData)
+   {
+      $scodesterHttpQueryBuilder = new ScodesterHttpQueryBuilder('https://www.sourcecodester.com/');
+
+      $projectData->srcUrl = $scodesterHttpQueryBuilder->getDownloadQuery($projectData->id);
+   }
 
 print_r($projectListAllArray);
