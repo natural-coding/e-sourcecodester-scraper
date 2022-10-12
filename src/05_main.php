@@ -79,6 +79,8 @@ foreach($projectListAllArray as $projectsOnWebPageArray)
 print_r($projectListAllArray);
 */
 
+// ("57 Download and save file")
+/*
 $useTestDoubles = true;
 // $curlWrapperFactory = new CurlWrapperFactory($useTestDoubles);
 $curlWrapperFactory = new CurlWrapperFactory();
@@ -87,3 +89,5 @@ $curlWrapperFactory = new CurlWrapperFactory();
 $downloadFileCurlWrapper = $curlWrapperFactory->createDownloadFileCurlWrapper(Constants::DOWNLOADS_PATH);
 
 $downloadFileCurlWrapper->downloadFile('https://www.sourcecodester.com/sites/default/files/download/oretnom23/train_scheduler_app.zip','15720.zip');
+*/
+

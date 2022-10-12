@@ -11,7 +11,7 @@ class ScodesterHttpQueryBuilder extends HttpQueryBuilder
       parent::__construct($p_siteUrl);
    }
 
-   public function getDownloadQuery(int $p_projectId) : string
+   public function getProjectDownloadingPageQuery(int $p_projectId) : string
    {
       return sprintf('%s/download-code?nid=%d',$this->getSiteUrl(),abs($p_projectId));
    }
