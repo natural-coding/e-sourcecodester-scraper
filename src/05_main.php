@@ -80,7 +80,10 @@ print_r($projectListAllArray);
 */
 
 $useTestDoubles = true;
-$curlWrapperFactory = new CurlWrapperFactory($useTestDoubles);
-// $curlWrapperFactory = new CurlWrapperFactory();
+// $curlWrapperFactory = new CurlWrapperFactory($useTestDoubles);
+$curlWrapperFactory = new CurlWrapperFactory();
 
-$downloadFileCurlWrapper = $curlWrapperFactory->createDownloadFileCurlWrapper();
+
+$downloadFileCurlWrapper = $curlWrapperFactory->createDownloadFileCurlWrapper(Constants::DOWNLOADS_PATH);
+
+$downloadFileCurlWrapper->downloadFile('https://www.sourcecodester.com/sites/default/files/download/oretnom23/train_scheduler_app.zip','15720.zip');

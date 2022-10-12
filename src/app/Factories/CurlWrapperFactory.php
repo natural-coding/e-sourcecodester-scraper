@@ -57,8 +57,8 @@ class CurlWrapperFactory
          return new RequestPageCurlWrapper($this->curlHandle);
    }
 
-   public function createDownloadFileCurlWrapper() : DownloadFileInterface
+   public function createDownloadFileCurlWrapper(string $p_downloadsDirectory) : DownloadFileInterface
    {
-      return new DownloadFileCurlWrapper();
+      return new DownloadFileCurlWrapper($this->curlHandle,$p_downloadsDirectory);
    }
 }
