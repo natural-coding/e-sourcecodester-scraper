@@ -40,7 +40,15 @@ for($pageNumQueryParam = 0; $pageNumQueryParam < 2; ++$pageNumQueryParam)
 print_r($projectListAllArray);
 */
 
+// ("52 getProjectListWebPageQuery works using sprintf!")
+/*
 $scodesterHttpQueryBuilder = new ScodesterHttpQueryBuilder('https://www.sourcecodester.com/');
 $url = $scodesterHttpQueryBuilder->getProjectListWebPageQuery(10);
+
+print $url;
+*/
+
+$scodesterHttpQueryBuilder = new ScodesterHttpQueryBuilder('https://www.sourcecodester.com/');
+$url = $scodesterHttpQueryBuilder->getDownloadQuery(15628);
 
 print $url;
