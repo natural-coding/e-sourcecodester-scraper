@@ -64,6 +64,8 @@ $projectListAllArray = json_decode(file_get_contents(Constants::PROJECT_LIST_DAT
 print_r($projectListAllArray);
 */
 
+// ("55 Add url to download source to project data JSON")
+/*
 $projectListAllArray = json_decode(file_get_contents(Constants::PROJECT_LIST_DATA_DEBUG_PATH . 'output-projectListAllArray.txt'));
 
 foreach($projectListAllArray as $projectsOnWebPageArray)
@@ -75,3 +77,10 @@ foreach($projectListAllArray as $projectsOnWebPageArray)
    }
 
 print_r($projectListAllArray);
+*/
+
+$useTestDoubles = true;
+$curlWrapperFactory = new CurlWrapperFactory($useTestDoubles);
+// $curlWrapperFactory = new CurlWrapperFactory();
+
+$downloadFileCurlWrapper = $curlWrapperFactory->createDownloadFileCurlWrapper();

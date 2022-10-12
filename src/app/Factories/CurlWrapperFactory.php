@@ -3,7 +3,9 @@
 namespace App\Factories;
 
 use App\RequestPageCurlWrapper;
+use App\DownloadFileCurlWrapper;
 use App\Interfaces\RequestPageInterface;
+use App\Interfaces\DownloadFileInterface;
 
 class CurlWrapperFactory
 {
@@ -53,5 +55,10 @@ class CurlWrapperFactory
          return new \App\TestDoubles\RequestPageCurlWrapperMock($this->curlHandle);
       else
          return new RequestPageCurlWrapper($this->curlHandle);
+   }
+
+   public function createDownloadFileCurlWrapper() : DownloadFileInterface
+   {
+      return new DownloadFileCurlWrapper();
    }
 }
