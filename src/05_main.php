@@ -9,6 +9,8 @@ use App\ProjectListWebPageParser;
 use App\DownloadFileCurlWrapper;
 use App\Factories\CurlWrapperFactory;
 
+// ("51 CurlWrapperFactory useTestDoubles method")
+/*
 $useTestDoubles = true;
 $curlWrapperFactory = new CurlWrapperFactory($useTestDoubles);
 // $curlWrapperFactory = new CurlWrapperFactory();
@@ -36,3 +38,9 @@ for($pageNumQueryParam = 0; $pageNumQueryParam < 2; ++$pageNumQueryParam)
 }
 
 print_r($projectListAllArray);
+*/
+
+$scodesterHttpQueryBuilder = new ScodesterHttpQueryBuilder('https://www.sourcecodester.com/');
+$url = $scodesterHttpQueryBuilder->getProjectListWebPageQuery(10);
+
+print $url;

@@ -8,7 +8,7 @@ class HttpQueryBuilder
 
    public function __construct(string $p_siteUrl)
    {
-      $this->siteUrl = $p_siteUrl;
+      $this->siteUrl = rtrim($p_siteUrl,'/');
    }
 
    public function getSiteUrl() : string
