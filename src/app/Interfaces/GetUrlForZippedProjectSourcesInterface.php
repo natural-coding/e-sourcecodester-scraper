@@ -2,7 +2,7 @@
 
 namespace App\Interfaces;
 
-interface GetUrlForZippedProjectSources
+interface GetUrlForZippedProjectSourcesInterface
 {
    function getUrlForZippedProjectSources() : string;
 }

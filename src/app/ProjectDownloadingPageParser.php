@@ -2,7 +2,7 @@
 
 namespace App;
 
-class ProjectDownloadingPageParser implements \App\Interfaces\GetUrlForZippedProjectSources
+class ProjectDownloadingPageParser implements \App\Interfaces\GetUrlForZippedProjectSourcesInterface
 {
    function getUrlForZippedProjectSources() : string
    {
