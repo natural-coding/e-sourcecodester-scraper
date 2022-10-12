@@ -16,9 +16,25 @@ class CurlWrapperFactory
       return in_array($p_methodName,$this->methodsThatReturnTestDouble);
    }
 
-   public function __construct($p_methodsThatReturnTestDouble = [])
+   private function useTestDoubles(bool $p_useTestDoubles)
    {
-      $this->methodsThatReturnTestDouble = $p_methodsThatReturnTestDouble;
+      if (!$p_useTestDoubles)
+         $this->methodsThatReturnTestDouble = [];
+      else
+      {
+         $methodsToPushArray = ['createRequestPageCurlWrapper'];
+         $diff = array_diff($methodsToPushArray, $this->methodsThatReturnTestDouble);
+
+         array_push($this->methodsThatReturnTestDouble, ...$diff);
+      }
+   }
+
+   public function __construct(bool $p_useTestDoubles = false)
+   {
+      $this->useTestDoubles($p_useTestDoubles);
+
+      if ($p_useTestDoubles)
+         return;
 
       $this->curlHandle = curl_init();
       if (!$this->curlHandle)
@@ -27,7 +43,8 @@ class CurlWrapperFactory
 
    public function __destruct()
    {
-      curl_close($this->curlHandle);
+      if ($this->curlHandle)
+         curl_close($this->curlHandle);
    }
 
    public function createRequestPageCurlWrapper() : RequestPageInterface
