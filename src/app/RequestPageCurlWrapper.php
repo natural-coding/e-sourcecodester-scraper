@@ -12,6 +12,8 @@ class RequestPageCurlWrapper extends CurlWrapperBase implements \App\Interfaces\
 
    function sendRequest(string $p_Url) : string
    {
+      $this->setDefaultOptions();
+
       $res = curl_setopt($this->getCurlHandle(),CURLOPT_URL,$p_Url);
       self::CheckCurlSetopt($res);
 

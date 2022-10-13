@@ -196,10 +196,13 @@ foreach($projectListAllArray as $projectsOnWebPageArray)
 
 // print_r($projectListAllArray);
 */
-   $projectListAllArray = json_decode(file_get_contents(Constants::PROJECT_LIST_DATA_DEBUG_PATH . 'output-projectListAllArray.txt'));
 
-//$useTestDoubles = true;
-$useTestDoubles = false;
+// ("65 SleeperFactory works Add FactoryBase.php")   
+/*
+$projectListAllArray = json_decode(file_get_contents(Constants::PROJECT_LIST_DATA_DEBUG_PATH . 'output-projectListAllArray.txt'));
+
+$useTestDoubles = true;
+//$useTestDoubles = false;
 $curlWrapperFactory = new CurlWrapperFactory($useTestDoubles);
 $sleeperFactory = new SleeperFactory($useTestDoubles);
 
@@ -215,6 +218,7 @@ foreach($projectListAllArray as $projectsOnWebPageArray)
       $downloadingPageUrl = $scodesterHttpQueryBuilder->getProjectDownloadingPageQuery($projectData->id);
 
       $response = $requestPageCurlWrapper->sendRequest($downloadingPageUrl);
+      print "downloadingPageUrl: $downloadingPageUrl\n";
 
       $projectDownloadingPageParser = new ProjectDownloadingPageParser($response);
       $projectData->ZippedSourcesUri = $projectDownloadingPageParser->getUriForZippedProjectSources();
@@ -222,6 +226,45 @@ foreach($projectListAllArray as $projectsOnWebPageArray)
       var_dump($projectData->ZippedSourcesUri);
 
       $sleeperFactory->createSleeper(1,3);
+      // $sleeperFactory->createSleeper(0,0);
    }
 
 // print_r($projectListAllArray);
+*/
+$projectListAllArray = json_decode(file_get_contents(Constants::PROJECT_LIST_DATA_DEBUG_PATH . 'output-projectListAllArray.txt'));
+
+// $useTestDoubles = true;
+$useTestDoubles = false;
+$curlWrapperFactory = new CurlWrapperFactory($useTestDoubles);
+$sleeperFactory = new SleeperFactory($useTestDoubles);
+
+$requestPageCurlWrapper = $curlWrapperFactory->createRequestPageCurlWrapper();
+
+$count = 0;
+foreach($projectListAllArray as $projectsOnWebPageArray)
+   foreach($projectsOnWebPageArray as $projectData)
+   {
+      $scodesterHttpQueryBuilder = new ScodesterHttpQueryBuilder('https://www.sourcecodester.com/');
+
+      $downloadingPageUrl = $scodesterHttpQueryBuilder->getProjectDownloadingPageQuery($projectData->id);
+
+      $response = $requestPageCurlWrapper->sendRequest($downloadingPageUrl);
+
+      $projectDownloadingPageParser = new ProjectDownloadingPageParser($response);
+      $zippedSourcesUri = $projectDownloadingPageParser->getUriForZippedProjectSources();
+
+      $downloadFileCurlWrapper = $curlWrapperFactory->createDownloadFileCurlWrapper(Constants::DOWNLOADS_PATH);
+
+      $fileUrlToDownload = 'https://www.sourcecodester.com' . $zippedSourcesUri;
+      $downloadFileCurlWrapper->downloadFile(
+         $fileUrlToDownload,
+         $projectData->id . '.zip'
+      );
+
+      print "Downloading... [$fileUrlToDownload]" . PHP_EOL;
+
+      $sleeperFactory->createSleeper(1,5);
+
+      if (++$count === 2)
+         die;
+   }
