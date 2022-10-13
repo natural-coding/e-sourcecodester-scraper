@@ -128,6 +128,8 @@ foreach($projectListAllArray as $projectsOnWebPageArray)
 print_r($projectListAllArray);
 */
 
+// ("63 zipped uri parsing works")
+/*
 $projectListAllArray = json_decode(file_get_contents(Constants::PROJECT_LIST_DATA_DEBUG_PATH . 'output-projectListAllArray.txt'));
 
 $useTestDoubles = true;
@@ -135,7 +137,6 @@ $curlWrapperFactory = new CurlWrapperFactory($useTestDoubles);
 //$curlWrapperFactory = new CurlWrapperFactory();
 
 $requestPageCurlWrapper = $curlWrapperFactory->createRequestPageCurlWrapper();
-
 
 $count = 0;
 
@@ -161,3 +162,33 @@ foreach($projectListAllArray as $projectsOnWebPageArray)
    }
 
 print_r($projectListAllArray);
+*/
+
+$projectListAllArray = json_decode(file_get_contents(Constants::PROJECT_LIST_DATA_DEBUG_PATH . 'output-projectListAllArray.txt'));
+
+$useTestDoubles = true;
+$curlWrapperFactory = new CurlWrapperFactory($useTestDoubles);
+//$curlWrapperFactory = new CurlWrapperFactory();
+
+$requestPageCurlWrapper = $curlWrapperFactory->createRequestPageCurlWrapper();
+
+$count = 0;
+
+foreach($projectListAllArray as $projectsOnWebPageArray)
+   foreach($projectsOnWebPageArray as $projectData)
+   {
+      $scodesterHttpQueryBuilder = new ScodesterHttpQueryBuilder('https://www.sourcecodester.com/');
+
+      $downloadingPageUrl = $scodesterHttpQueryBuilder->getProjectDownloadingPageQuery($projectData->id);
+
+      $response = $requestPageCurlWrapper->sendRequest($downloadingPageUrl);
+
+      $projectDownloadingPageParser = new ProjectDownloadingPageParser($response);
+      $projectData->ZippedSourcesUri = $projectDownloadingPageParser->getUriForZippedProjectSources();
+
+      var_dump($projectData->ZippedSourcesUri);
+
+      new \Framework\Sleeper();
+   }
+
+// print_r($projectListAllArray);
