@@ -6,6 +6,7 @@ use App\Constants;
 use App\ScodesterHttpQueryBuilder;
 use App\RequestPageCurlWrapper;
 use App\ProjectListWebPageParser;
+use App\ProjectDownloadingPageParser;
 use App\DownloadFileCurlWrapper;
 use App\Factories\CurlWrapperFactory;
 
@@ -146,11 +147,13 @@ foreach($projectListAllArray as $projectsOnWebPageArray)
       $downloadingPageUrl = $scodesterHttpQueryBuilder->getProjectDownloadingPageQuery($projectData->id);
 
       $response = $requestPageCurlWrapper->sendRequest($downloadingPageUrl);
-      var_dump($response);
+
+      $projectDownloadingPageParser = new ProjectDownloadingPageParser($response);
+      $projectData->ZippedSourcesUri = $projectDownloadingPageParser->getUriForZippedProjectSources();
+
+      //var_dump($response);
+      var_dump($projectData->ZippedSourcesUri);
       die;
-      if (++$count===2)
-         die;
-      sleep(2);
 
 
 

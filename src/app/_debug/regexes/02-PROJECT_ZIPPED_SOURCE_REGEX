@@ -1,0 +1,16 @@
+Regex:
+#var _file = '(?<ZippedUriToDownload>[^']+)';#gm
+
+Explanation (according to regex101.com):
+---
+- - content: var _file = '/sites/default/files/download/oretnom23/train_scheduler_app.zip';
+    isParticipating: true
+    groupNum: 0
+    startPos: 4666
+    endPos: 4744
+  - content: "/sites/default/files/download/oretnom23/train_scheduler_app.zip"
+    isParticipating: true
+    groupNum: 1
+    groupName: ZippedUriToDownload
+    startPos: 4679
+    endPos: 4742
