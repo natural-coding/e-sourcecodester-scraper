@@ -240,10 +240,16 @@ $sleeperFactory = new SleeperFactory($useTestDoubles);
 
 $requestPageCurlWrapper = $curlWrapperFactory->createRequestPageCurlWrapper();
 
+print 'Download files from https://www.sourcecodester.com' . PHP_EOL;
+
 $count = 0;
 foreach($projectListAllArray as $projectsOnWebPageArray)
    foreach($projectsOnWebPageArray as $projectData)
    {
+      $idThatAlreadyDownloadedArray = [15627,15688,15697,15720,15689,15683];
+      if (in_array($projectData->id,$idThatAlreadyDownloadedArray))
+         continue;
+
       $scodesterHttpQueryBuilder = new ScodesterHttpQueryBuilder('https://www.sourcecodester.com/');
 
       $downloadingPageUrl = $scodesterHttpQueryBuilder->getProjectDownloadingPageQuery($projectData->id);
@@ -256,12 +262,13 @@ foreach($projectListAllArray as $projectsOnWebPageArray)
       $downloadFileCurlWrapper = $curlWrapperFactory->createDownloadFileCurlWrapper(Constants::DOWNLOADS_PATH);
 
       $fileUrlToDownload = 'https://www.sourcecodester.com' . $zippedSourcesUri;
-      $downloadFileCurlWrapper->downloadFile(
-         $fileUrlToDownload,
-         $projectData->id . '.zip'
-      );
+      $fileNameToSave = $projectData->id . '.zip';
 
-      print "Downloading... [$fileUrlToDownload]" . PHP_EOL;
+      print "$zippedSourcesUri -> ";
+
+      $downloadFileCurlWrapper->downloadFile($fileUrlToDownload,$fileNameToSave);
+
+      print "[$fileNameToSave]" . PHP_EOL;
 
       $sleeperFactory->createSleeper(1,5);
 
