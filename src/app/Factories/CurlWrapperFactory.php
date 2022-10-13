@@ -7,33 +7,15 @@ use App\DownloadFileCurlWrapper;
 use App\Interfaces\RequestPageInterface;
 use App\Interfaces\DownloadFileInterface;
 
-class CurlWrapperFactory
+class CurlWrapperFactory extends FactoryBase
 {
    private const ERROR_CANNOT_INIT_CURL = '[ERROR]: curl_init';
    private $curlHandle;
-   private $methodsThatReturnTestDouble = [];
-
-   private function methodShouldReturnTestDouble($p_methodName) : bool
-   {
-      return in_array($p_methodName,$this->methodsThatReturnTestDouble);
-   }
-
-   private function useTestDoubles(bool $p_useTestDoubles)
-   {
-      if (!$p_useTestDoubles)
-         $this->methodsThatReturnTestDouble = [];
-      else
-      {
-         $methodsToPushArray = ['createRequestPageCurlWrapper'];
-         $diff = array_diff($methodsToPushArray, $this->methodsThatReturnTestDouble);
-
-         array_push($this->methodsThatReturnTestDouble, ...$diff);
-      }
-   }
 
    public function __construct(bool $p_useTestDoubles = false)
    {
-      $this->useTestDoubles($p_useTestDoubles);
+      $methodNamesToUseAsTestDoubles = ['createRequestPageCurlWrapper'];
+      parent::__construct($p_useTestDoubles,$methodNamesToUseAsTestDoubles);
 
       if ($p_useTestDoubles)
          return;
@@ -51,7 +33,7 @@ class CurlWrapperFactory
 
    public function createRequestPageCurlWrapper() : RequestPageInterface
    {
-      if (self::methodShouldReturnTestDouble(__FUNCTION__))
+      if ($this->methodShouldReturnTestDouble(__FUNCTION__))
          return new \App\TestDoubles\RequestPageCurlWrapperMock($this->curlHandle);
       else
          return new RequestPageCurlWrapper($this->curlHandle);

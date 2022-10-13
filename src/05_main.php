@@ -9,6 +9,7 @@ use App\ProjectListWebPageParser;
 use App\ProjectDownloadingPageParser;
 use App\DownloadFileCurlWrapper;
 use App\Factories\CurlWrapperFactory;
+use App\Factories\SleeperFactory;
 
 // ("51 CurlWrapperFactory useTestDoubles method")
 
@@ -164,6 +165,8 @@ foreach($projectListAllArray as $projectsOnWebPageArray)
 print_r($projectListAllArray);
 */
 
+// ("64 Sleeper object works")
+/*
 $projectListAllArray = json_decode(file_get_contents(Constants::PROJECT_LIST_DATA_DEBUG_PATH . 'output-projectListAllArray.txt'));
 
 $useTestDoubles = true;
@@ -189,6 +192,36 @@ foreach($projectListAllArray as $projectsOnWebPageArray)
       var_dump($projectData->ZippedSourcesUri);
 
       new \Framework\Sleeper();
+   }
+
+// print_r($projectListAllArray);
+*/
+   $projectListAllArray = json_decode(file_get_contents(Constants::PROJECT_LIST_DATA_DEBUG_PATH . 'output-projectListAllArray.txt'));
+
+//$useTestDoubles = true;
+$useTestDoubles = false;
+$curlWrapperFactory = new CurlWrapperFactory($useTestDoubles);
+$sleeperFactory = new SleeperFactory($useTestDoubles);
+
+$requestPageCurlWrapper = $curlWrapperFactory->createRequestPageCurlWrapper();
+
+$count = 0;
+
+foreach($projectListAllArray as $projectsOnWebPageArray)
+   foreach($projectsOnWebPageArray as $projectData)
+   {
+      $scodesterHttpQueryBuilder = new ScodesterHttpQueryBuilder('https://www.sourcecodester.com/');
+
+      $downloadingPageUrl = $scodesterHttpQueryBuilder->getProjectDownloadingPageQuery($projectData->id);
+
+      $response = $requestPageCurlWrapper->sendRequest($downloadingPageUrl);
+
+      $projectDownloadingPageParser = new ProjectDownloadingPageParser($response);
+      $projectData->ZippedSourcesUri = $projectDownloadingPageParser->getUriForZippedProjectSources();
+
+      var_dump($projectData->ZippedSourcesUri);
+
+      $sleeperFactory->createSleeper();
    }
 
 // print_r($projectListAllArray);
