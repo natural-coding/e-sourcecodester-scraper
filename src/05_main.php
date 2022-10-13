@@ -90,3 +90,36 @@ $downloadFileCurlWrapper = $curlWrapperFactory->createDownloadFileCurlWrapper(Co
 
 $downloadFileCurlWrapper->downloadFile('https://www.sourcecodester.com/sites/default/files/download/oretnom23/train_scheduler_app.zip','15720.zip');
 */
+
+$projectListAllArray = json_decode(file_get_contents(Constants::PROJECT_LIST_DATA_DEBUG_PATH . 'output-projectListAllArray.txt'));
+
+// $useTestDoubles = true;
+// $curlWrapperFactory = new CurlWrapperFactory($useTestDoubles);
+$curlWrapperFactory = new CurlWrapperFactory();
+
+$requestPageCurlWrapper = $curlWrapperFactory->createRequestPageCurlWrapper();
+
+
+$count = 0;
+
+foreach($projectListAllArray as $projectsOnWebPageArray)
+   foreach($projectsOnWebPageArray as $projectData)
+   {
+      $scodesterHttpQueryBuilder = new ScodesterHttpQueryBuilder('https://www.sourcecodester.com/');
+
+      $downloadingPageUrl = $scodesterHttpQueryBuilder->getProjectDownloadingPageQuery($projectData->id);
+
+      var_dump($projectData->id);
+
+      $response = $requestPageCurlWrapper->sendRequest($downloadingPageUrl);
+      var_dump($response);
+      if (++$count===2)
+         die;
+      sleep(2);
+
+
+
+      // $projectData->srcUrl = $scodesterHttpQueryBuilder->getProjectDownloadingPageQuery($projectData->id);
+   }
+
+print_r($projectListAllArray);
