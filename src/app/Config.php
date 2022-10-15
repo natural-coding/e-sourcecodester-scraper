@@ -39,4 +39,18 @@ class Config
 
       return realpath($outputDir) . DIRECTORY_SEPARATOR;
    }
+
+   public function getFileNameForStage(string $p_scrapingStageName) : string
+   {
+      $outFileName = 'default.txt';
+
+      switch ($p_scrapingStageName)
+      {
+         case "01-ProjectListPage":
+            $outFileName = sprintf('project-descriptions-%03d-%03d',1,10);
+            break;
+      }
+
+      return $this->getOutputDirForStage($p_scrapingStageName) . $outFileName;
+   }
 }

@@ -53,7 +53,7 @@ if ($config["01-ProjectListPage"]->MakeRequestsToNetwork)
    }
 
    file_put_contents(
-      $configMain->getOutputDirForStage("01-ProjectListPage") . 'projectListAllArray',
+      $configMain->getFileNameForStage("01-ProjectListPage"),
       json_encode($projectListAllArray)
    );
 }
