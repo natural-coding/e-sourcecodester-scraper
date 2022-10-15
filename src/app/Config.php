@@ -4,16 +4,16 @@ namespace App;
 
 class Config
 {
-   private $configJson;
+   private \stdClass $configJson;
+
    public function __construct(string $p_fileName)
    {
       $jsonStr = file_get_contents($p_fileName);
-      var_dump($jsonStr);
-      die;
+      $this->configJson = json_decode($jsonStr);
    }
 
-   public function getConfigJson() : stdClass
+   public function getJson() : \stdClass
    {
-
+      return $this->configJson;
    }
 }

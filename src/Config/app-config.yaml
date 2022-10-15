@@ -13,19 +13,19 @@
 #   - 03-ProjectSourcesZipFile
 
 # 01-ProjectListPage
-01-ProjectListPage:
+ProjectListPage:
   MakeRequestsToNetwork: true
   PaginationStartPage: 1
   PaginationEndPage: 10
 
 # 02-ProjectSourcesDownloadLink
-02-ProjectSourcesDownloadLink:
+ProjectSourcesDownloadLink:
   MakeRequestsToNetwork: false
   PaginationStartPage: 1
   PaginationEndPage: 10
 
 # 03-ProjectSourcesZipFile
-03-ProjectSourcesZipFile:
+ProjectSourcesZipFile:
   MakeRequestsToNetwork: false
   PaginationStartPage: 1
   PaginationEndPage: 10
