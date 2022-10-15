@@ -14,18 +14,18 @@
 
 # 01-ProjectListPage
 01-ProjectListPage:
-  MakeRequestsToNetwork: 1
+  MakeRequestsToNetwork: true
   PaginationStartPage: 1
   PaginationEndPage: 10
 
 # 02-ProjectSourcesDownloadLink
 02-ProjectSourcesDownloadLink:
-  MakeRequestsToNetwork: 1
+  MakeRequestsToNetwork: false
   PaginationStartPage: 1
   PaginationEndPage: 10
 
 # 03-ProjectSourcesZipFile
 03-ProjectSourcesZipFile:
-  MakeRequestsToNetwork: 1
+  MakeRequestsToNetwork: false
   PaginationStartPage: 1
   PaginationEndPage: 10
