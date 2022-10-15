@@ -231,6 +231,8 @@ foreach($projectListAllArray as $projectsOnWebPageArray)
 
 // print_r($projectListAllArray);
 */
+// ("68 file download report")
+/*
 $projectListAllArray = json_decode(file_get_contents(Constants::PROJECT_LIST_DATA_DEBUG_PATH . 'output-projectListAllArray.txt'));
 
 // $useTestDoubles = true;
@@ -275,3 +277,4 @@ foreach($projectListAllArray as $projectsOnWebPageArray)
       if (++$count === 2)
          die;
    }
+*/

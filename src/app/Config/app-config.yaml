@@ -1,0 +1,31 @@
+---
+# sourcecodester parser setup
+# convert to json using https://www.json2yaml.com/
+
+# directories to save logs
+#   - src/scraper-output/01-ProjectListPage
+#   - src/scraper-output/02-ProjectSourcesDownloadLink
+#   - src/scraper-output/03-ProjectSourcesZipFile  
+
+# parser has the following components
+#   - 01-ProjectListPage
+#   - 02-ProjectSourcesDownloadLink
+#   - 03-ProjectSourcesZipFile
+
+# 01-ProjectListPage
+01-ProjectListPage:
+  MakeRequestsToNetwork: 1
+  PaginationStartPage: 1
+  PaginationEndPage: 10
+
+# 02-ProjectSourcesDownloadLink
+02-ProjectSourcesDownloadLink:
+  MakeRequestsToNetwork: 1
+  PaginationStartPage: 1
+  PaginationEndPage: 10
+
+# 03-ProjectSourcesZipFile
+03-ProjectSourcesZipFile:
+  MakeRequestsToNetwork: 1
+  PaginationStartPage: 1
+  PaginationEndPage: 10

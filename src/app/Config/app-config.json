@@ -1,0 +1,17 @@
+{
+  "01-ProjectListPage": {
+    "MakeRequestsToNetwork": 1,
+    "PaginationStartPage": 1,
+    "PaginationEndPage": 10
+  },
+  "02-ProjectSourcesDownloadLink": {
+    "MakeRequestsToNetwork": 1,
+    "PaginationStartPage": 1,
+    "PaginationEndPage": 10
+  },
+  "03-ProjectSourcesZipFile": {
+    "MakeRequestsToNetwork": 1,
+    "PaginationStartPage": 1,
+    "PaginationEndPage": 10
+  }
+}
