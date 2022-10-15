@@ -52,5 +52,8 @@ if ($config["01-ProjectListPage"]->MakeRequestsToNetwork)
       $projectListAllArray = array_merge($projectListAllArray,$projectListArray);
    }
 
-   var_dump(substr(json_encode($projectListAllArray),0,100));
+   file_put_contents(
+      $configMain->getOutputDirForStage("01-ProjectListPage") . 'projectListAllArray',
+      json_encode($projectListAllArray)
+   );
 }

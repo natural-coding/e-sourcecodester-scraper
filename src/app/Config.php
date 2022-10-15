@@ -1,6 +1,7 @@
 <?php
 
 namespace App;
+use App\Constants;
 
 class Config
 {
@@ -20,5 +21,22 @@ class Config
    public function getSiteUrl() : string
    {
       return $this->getJson()->SiteUrl;
+   }
+
+   public function getOutputDirForStage(string $p_scrapingStageName) : string
+   {
+      $outputDir = Constants::SCRAPER_OUTPUT_PATH;
+
+      switch ($p_scrapingStageName)
+      {
+         case "01-ProjectListPage":
+            $outputDir .= $p_scrapingStageName;
+            break;
+         default:
+            rtrim($outputDir,DIRECTORY_SEPARATOR);
+            break;
+      }
+
+      return realpath($outputDir) . DIRECTORY_SEPARATOR;
    }
 }
