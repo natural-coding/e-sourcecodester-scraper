@@ -12,6 +12,8 @@
 #   - 02-ProjectSourcesDownloadLink
 #   - 03-ProjectSourcesZipFile
 
+SiteUrl: "https://www.sourcecodester.com/"
+
 # 01-ProjectListPage
 ProjectListPage:
   MakeRequestsToNetwork: true

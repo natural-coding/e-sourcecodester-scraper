@@ -1,4 +1,5 @@
 {
+  "SiteUrl": "https://www.sourcecodester.com/",
   "ProjectListPage": {
     "MakeRequestsToNetwork": true,
     "PaginationStartPage": 1,
