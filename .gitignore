@@ -3,3 +3,5 @@ r.bat
 inf.bat
 Downloads/
 src/vendor/
+src/scraper-output
+!.gitkeep

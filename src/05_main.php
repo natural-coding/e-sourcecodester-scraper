@@ -19,6 +19,8 @@ $config = new Config(Constants::CONFIG_PATH . 'app-config.json');
 var_dump($config->getJson());
 */
 
+// ("78 getFileNameForStage works")
+/*
 $configMain = new Config(Constants::CONFIG_PATH . 'app-config.json');
 
 $config = [];
@@ -54,6 +56,45 @@ if ($config["01-ProjectListPage"]->MakeRequestsToNetwork)
 
    file_put_contents(
       $configMain->getFileNameForStage("01-ProjectListPage"),
+      json_encode($projectListAllArray)
+   );
+}
+*/
+
+$configApp = new Config(Constants::CONFIG_PATH . 'app-config.json');
+$configProjectListWebPage = $configApp->getJson()->ProjectListPage;
+
+$projectListAllArray = [];
+
+/**
+ * Stage 01. Get project ids and descriptions from the web page
+ */
+if ($configProjectListWebPage->MakeRequestsToNetwork)
+{
+   $useTestDoubles = true;
+   $curlWrapperFactory = new CurlWrapperFactory($useTestDoubles);
+
+   // $curlWrapperFactory = new CurlWrapperFactory();
+
+   $requestPageCurlWrapper = $curlWrapperFactory->createRequestPageCurlWrapper();
+
+   for($pageNumQueryParam = $configProjectListWebPage->PaginationStartPage;
+      $pageNumQueryParam <= $configProjectListWebPage->PaginationEndPage;
+      ++$pageNumQueryParam)
+   {
+      $scodesterHttpQueryBuilder = new ScodesterHttpQueryBuilder($configApp->getSiteUrl());
+      $url = $scodesterHttpQueryBuilder->getProjectListWebPageQuery($pageNumQueryParam);
+
+      $response = $requestPageCurlWrapper->sendRequest($url);
+
+      $projectListWebPageParser = new ProjectListWebPageParser($response);
+      $projectListArray = $projectListWebPageParser->getProjectListJsonArray();
+
+      $projectListAllArray = array_merge($projectListAllArray,$projectListArray);
+   }
+
+   file_put_contents(
+      $configApp->getOutputDirForStage('dummy') . 'projectListAllArray',
       json_encode($projectListAllArray)
    );
 }
