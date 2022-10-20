@@ -2,16 +2,18 @@
   "GlobalScraperSetup": {
     "SiteUrl": "https://www.sourcecodester.com/",
     "IdToStop": -1,
-    "PageNumToStop": 2
+    "PageNumToStop": -1,
+    "RequestDelayMin": 3,
+    "RequestDelayMax": 7
   },
   "stages": [
     {
       "name": "ProjectListWebPage",
       "id": 1,
       "outputFilePrefix": "project-descriptions",
-      "MakeRequestsToNetwork": true,
+      "MakeRequestsToNetwork": false,
       "PaginationStartPage": 1,
-      "PaginationEndPage": 10
+      "PaginationEndPage": 5
     },
     {
       "name": "ProjectSourcesDownloadLink",

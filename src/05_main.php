@@ -7,6 +7,7 @@ use App\Constants;
 use App\Factories\CurlWrapperFactory;
 use App\ScodesterHttpQueryBuilder;
 use App\ProjectListWebPageParser;
+use App\Factories\SleeperFactory;
 
 // ("73 read config from file")
 /*
@@ -117,10 +118,20 @@ $configStage = $configApp->getScrapingStage('ProjectListWebPage');
 
 $outProjectListAllArray = [];
 
-if ($configStage->MakeRequestsToNetwork)
+if (!$configStage->MakeRequestsToNetwork)
 {
-   $useTestDoubles = true;
-   $curlWrapperFactory = new CurlWrapperFactory($useTestDoubles);
+   $jsonFileName = $configApp->getFileNameForStage($configStage->name);
+   $outProjectListAllArray = json_decode(file_get_contents($jsonFileName));
+   var_dump($outProjectListAllArray);
+}
+else
+{
+   // $useTestDoubles = true;
+   // $curlWrapperFactory = new CurlWrapperFactory($useTestDoubles);
+   $curlWrapperFactory = new CurlWrapperFactory();
+
+   $useTestDoublesForSleepers = false;
+   $sleeperFactory = new SleeperFactory($useTestDoublesForSleepers);
 
    // $curlWrapperFactory = new CurlWrapperFactory();
 
@@ -130,6 +141,8 @@ if ($configStage->MakeRequestsToNetwork)
       $pageNumQueryParam <= $configStage->PaginationEndPage;
       ++$pageNumQueryParam)
    {
+      printf('Fetching data for page %d...', $pageNumQueryParam);
+
       $scodesterHttpQueryBuilder = new ScodesterHttpQueryBuilder($configScraper->SiteUrl);
       $url = $scodesterHttpQueryBuilder->getProjectListWebPageQuery($pageNumQueryParam);
 
@@ -139,6 +152,12 @@ if ($configStage->MakeRequestsToNetwork)
       $projectListArray = $projectListWebPageParser->getProjectListJsonArray();
 
       $outProjectListAllArray = array_merge($outProjectListAllArray,$projectListArray);
+
+      print 'OK' . PHP_EOL;
+
+      print 'Delay between requests...';
+      $sleeperFactory->createSleeper($configScraper->RequestDelayMin,$configScraper->RequestDelayMax);
+      print 'OK' . PHP_EOL;
    }
 
    file_put_contents(
