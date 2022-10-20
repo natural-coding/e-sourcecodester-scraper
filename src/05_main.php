@@ -103,5 +103,7 @@ if ($configProjectListWebPage->MakeRequestsToNetwork)
 
 $configApp = new Config(Constants::CONFIG_PATH . 'app-config.json');
 
-var_dump($configApp->getScrapingStage('ProjectListWebPage'));
+// var_dump($configApp->getScrapingStage('ProjectListWebPage'));
+// var_dump($configApp->getScrapingStage('ProjectSourcesZipFile'));
+// var_dump($configApp->getScrapingStage('ProjectSourcesZipFilettt'));
 var_dump($configApp->getGlobalScraperSetup());

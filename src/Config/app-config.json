@@ -1,18 +1,30 @@
 {
-  "SiteUrl": "https://www.sourcecodester.com/",
-  "ProjectListPage": {
-    "MakeRequestsToNetwork": true,
-    "PaginationStartPage": 1,
-    "PaginationEndPage": 10
+  "GlobalScraperSetup": {
+    "SiteUrl": "https://www.sourcecodester.com/",
+    "IdToStop": -1,
+    "PageNumToStop": 2
   },
-  "ProjectSourcesDownloadLink": {
-    "MakeRequestsToNetwork": false,
-    "PaginationStartPage": 1,
-    "PaginationEndPage": 10
-  },
-  "ProjectSourcesZipFile": {
-    "MakeRequestsToNetwork": false,
-    "PaginationStartPage": 1,
-    "PaginationEndPage": 10
-  }
+  "stages": [
+    {
+      "name": "ProjectListWebPage",
+      "id": 1,
+      "MakeRequestsToNetwork": true,
+      "PaginationStartPage": 1,
+      "PaginationEndPage": 10
+    },
+    {
+      "name": "ProjectSourcesDownloadLink",
+      "id": 2,
+      "MakeRequestsToNetwork": false,
+      "PaginationStartPage": 1,
+      "PaginationEndPage": 10
+    },
+    {
+      "name": "ProjectSourcesZipFile",
+      "id": 3,
+      "MakeRequestsToNetwork": false,
+      "PaginationStartPage": 1,
+      "PaginationEndPage": 10
+    }
+  ]
 }
