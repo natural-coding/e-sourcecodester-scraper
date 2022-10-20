@@ -101,9 +101,48 @@ if ($configProjectListWebPage->MakeRequestsToNetwork)
 }
 */
 
+// ("82 new config works 1")
+/*
 $configApp = new Config(Constants::CONFIG_PATH . 'app-config.json');
 
 // var_dump($configApp->getScrapingStage('ProjectListWebPage'));
 // var_dump($configApp->getScrapingStage('ProjectSourcesZipFile'));
 // var_dump($configApp->getScrapingStage('ProjectSourcesZipFilettt'));
 var_dump($configApp->getGlobalScraperSetup());
+*/
+
+$configApp = new Config(Constants::CONFIG_PATH . 'app-config.json');
+$configScraper = $configApp->getGlobalScraperSetup();
+$configStage = $configApp->getScrapingStage('ProjectListWebPage');
+
+$outProjectListAllArray = [];
+
+if ($configStage->MakeRequestsToNetwork)
+{
+   $useTestDoubles = true;
+   $curlWrapperFactory = new CurlWrapperFactory($useTestDoubles);
+
+   // $curlWrapperFactory = new CurlWrapperFactory();
+
+   $requestPageCurlWrapper = $curlWrapperFactory->createRequestPageCurlWrapper();
+
+   for($pageNumQueryParam = $configStage->PaginationStartPage;
+      $pageNumQueryParam <= $configStage->PaginationEndPage;
+      ++$pageNumQueryParam)
+   {
+      $scodesterHttpQueryBuilder = new ScodesterHttpQueryBuilder($configScraper->SiteUrl);
+      $url = $scodesterHttpQueryBuilder->getProjectListWebPageQuery($pageNumQueryParam);
+
+      $response = $requestPageCurlWrapper->sendRequest($url);
+
+      $projectListWebPageParser = new ProjectListWebPageParser($response);
+      $projectListArray = $projectListWebPageParser->getProjectListJsonArray();
+
+      $outProjectListAllArray = array_merge($outProjectListAllArray,$projectListArray);
+   }
+
+   file_put_contents(
+      $configApp->getFileNameForStage($configStage->name),
+      json_encode($outProjectListAllArray)
+   );
+}

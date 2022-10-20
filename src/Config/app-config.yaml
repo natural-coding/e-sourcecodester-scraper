@@ -14,6 +14,7 @@ stages:
   # ProjectListWebPage
   - name: "ProjectListWebPage"
     id: 1
+    outputFilePrefix: "project-descriptions"
     MakeRequestsToNetwork: true
     PaginationStartPage: 1
     PaginationEndPage: 10

@@ -34,4 +34,24 @@ class Config
    {
       return $this->getJson()->GlobalScraperSetup;
    }
+
+   public function getOutputDirForStage(string $p_scrapingStageName) : string
+   {
+      $scrapingStage = $this->getScrapingStage($p_scrapingStageName);
+      $stageOutputDir = sprintf('%02d-%s', $scrapingStage->id, $scrapingStage->name);
+
+      return Constants::SCRAPER_OUTPUT_PATH . $stageOutputDir . DIRECTORY_SEPARATOR;
+   }
+   public function getFileNameForStage(string $p_scrapingStageName) : string
+   {
+      $scrapingStage = $this->getScrapingStage($p_scrapingStageName);
+      
+      $stageFileName = sprintf('%s-%03d-%03d',
+         $scrapingStage->outputFilePrefix,
+         $scrapingStage->PaginationStartPage,
+         $scrapingStage->PaginationEndPage
+      );
+
+      return  $this->getOutputDirForStage($p_scrapingStageName) . $stageFileName;
+   }
 }
