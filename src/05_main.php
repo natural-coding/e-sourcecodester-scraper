@@ -61,14 +61,15 @@ if ($config["01-ProjectListPage"]->MakeRequestsToNetwork)
 }
 */
 
+// ("79 Refactor Config class usage")
+/*
 $configApp = new Config(Constants::CONFIG_PATH . 'app-config.json');
 $configProjectListWebPage = $configApp->getJson()->ProjectListPage;
 
 $projectListAllArray = [];
-
-/**
- * Stage 01. Get project ids and descriptions from the web page
- */
+// 
+// Stage 01. Get project ids and descriptions from the web page
+// 
 if ($configProjectListWebPage->MakeRequestsToNetwork)
 {
    $useTestDoubles = true;
@@ -98,3 +99,9 @@ if ($configProjectListWebPage->MakeRequestsToNetwork)
       json_encode($projectListAllArray)
    );
 }
+*/
+
+$configApp = new Config(Constants::CONFIG_PATH . 'app-config.json');
+
+var_dump($configApp->getScrapingStage('ProjectListWebPage'));
+var_dump($configApp->getGlobalScraperSetup());
