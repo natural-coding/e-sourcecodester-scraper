@@ -11,9 +11,9 @@
       "name": "ProjectListWebPage",
       "id": 1,
       "outputFilePrefix": "project-descriptions",
-      "MakeRequestsToNetwork": false,
+      "MakeRequestsToNetwork": true,
       "PaginationStartPage": 1,
-      "PaginationEndPage": 5
+      "PaginationEndPage": 10
     },
     {
       "name": "ProjectSourcesDownloadLink",

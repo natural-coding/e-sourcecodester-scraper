@@ -112,6 +112,8 @@ $configApp = new Config(Constants::CONFIG_PATH . 'app-config.json');
 var_dump($configApp->getGlobalScraperSetup());
 */
 
+// ("85 scraping for stage 1 works")
+/*
 $configApp = new Config(Constants::CONFIG_PATH . 'app-config.json');
 $configScraper = $configApp->getGlobalScraperSetup();
 $configStage = $configApp->getScrapingStage('ProjectListWebPage');
@@ -132,6 +134,60 @@ else
    $curlWrapperFactory = new CurlWrapperFactory();
 
    $useTestDoublesForSleepers = false;
+   $sleeperFactory = new SleeperFactory($useTestDoublesForSleepers);
+
+   // $curlWrapperFactory = new CurlWrapperFactory();
+
+   $requestPageCurlWrapper = $curlWrapperFactory->createRequestPageCurlWrapper();
+
+   for($pageNumQueryParam = $configStage->PaginationStartPage;
+      $pageNumQueryParam <= $configStage->PaginationEndPage;
+      ++$pageNumQueryParam)
+   {
+      printf('Fetching data for page %d...', $pageNumQueryParam);
+
+      $scodesterHttpRequestBuilder = new ScodesterHttpRequestBuilder($configScraper->SiteUrl);
+      $url = $scodesterHttpRequestBuilder->getProjectListWebPageRequest($pageNumQueryParam);
+
+      $response = $requestPageCurlWrapper->sendRequest($url);
+
+      $projectListWebPageParser = new ProjectListWebPageParser($response);
+      $projectListArray = $projectListWebPageParser->getProjectListJsonArray();
+
+      $outProjectListAllArray = array_merge($outProjectListAllArray,$projectListArray);
+
+      print 'OK' . PHP_EOL;
+
+      print 'Delay between requests...';
+      $sleeperFactory->createSleeper($configScraper->RequestDelayMin,$configScraper->RequestDelayMax);
+      print 'OK' . PHP_EOL;
+   }
+
+   file_put_contents(
+      $configApp->getFileNameForStage($configStage->name),
+      json_encode($outProjectListAllArray)
+   );
+}
+*/
+$configApp = new Config(Constants::CONFIG_PATH . 'app-config.json');
+$configScraper = $configApp->getGlobalScraperSetup();
+$configStage = $configApp->getScrapingStage('ProjectListWebPage');
+
+$outProjectListAllArray = [];
+
+if (!$configStage->MakeRequestsToNetwork)
+{
+   $jsonFileName = $configApp->getFileNameForStage($configStage->name);
+   $outProjectListAllArray = json_decode(file_get_contents($jsonFileName));
+   var_dump($outProjectListAllArray);
+}
+else
+{
+   $useTestDoubles = true;
+   $curlWrapperFactory = new CurlWrapperFactory($useTestDoubles);
+   // $curlWrapperFactory = new CurlWrapperFactory();
+
+   $useTestDoublesForSleepers = true;
    $sleeperFactory = new SleeperFactory($useTestDoublesForSleepers);
 
    // $curlWrapperFactory = new CurlWrapperFactory();

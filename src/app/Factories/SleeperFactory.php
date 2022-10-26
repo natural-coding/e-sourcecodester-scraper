@@ -3,7 +3,7 @@
 namespace App\Factories;
 use Framework\Sleeper;
 
-class SleeperFactory extends FactoryBase
+class SleeperFactory extends UseTestDoublesFactory
 {
    public function __construct(bool $p_useTestDoubles = false)
    {

@@ -7,7 +7,7 @@ use App\DownloadFileCurlWrapper;
 use App\Interfaces\RequestPageInterface;
 use App\Interfaces\DownloadFileInterface;
 
-class CurlWrapperFactory extends FactoryBase
+class CurlWrapperFactory extends UseTestDoublesFactory
 {
    private const ERROR_CANNOT_INIT_CURL = '[ERROR]: curl_init';
    private $curlHandle;
