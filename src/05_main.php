@@ -5,9 +5,10 @@ require_once __DIR__ . '/vendor/autoload.php';
 use App\Config;
 use App\Constants;
 use App\Factories\CurlWrapperFactory;
-use App\ScodesterHttpRequestBuilder;
-use App\ProjectListWebPageParser;
 use App\Factories\SleeperFactory;
+use App\Factories\ParserFactory;
+use App\ScodesterHttpRequestBuilder;
+
 
 // ("73 read config from file")
 /*
@@ -190,7 +191,7 @@ else
    $useTestDoublesForSleepers = true;
    $sleeperFactory = new SleeperFactory($useTestDoublesForSleepers);
 
-   // $curlWrapperFactory = new CurlWrapperFactory();
+   $parserFactory = new ParserFactory();
 
    $requestPageCurlWrapper = $curlWrapperFactory->createRequestPageCurlWrapper();
 
@@ -205,7 +206,7 @@ else
 
       $response = $requestPageCurlWrapper->sendRequest($url);
 
-      $projectListWebPageParser = new ProjectListWebPageParser($response);
+      $projectListWebPageParser = $parserFactory->createProjectListWebPageParser($response);
       $projectListArray = $projectListWebPageParser->getProjectListJsonArray();
 
       $outProjectListAllArray = array_merge($outProjectListAllArray,$projectListArray);
