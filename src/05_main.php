@@ -11,7 +11,7 @@ use App\ScodesterHttpRequestBuilder;
 
 
 $factory_Array = [];
-$factory_Array['CurlWrapper'] = new CurlWrapperFactory($useTestDoubles = true);
+$factory_Array['CurlWrapper'] = new CurlWrapperFactory($useTestDoubles = false);
 $factory_Array['Sleeper'] = new SleeperFactory($useTestDoublesForSleepers = true);
 $factory_Array['Parser'] = new ParserFactory();
 
@@ -69,11 +69,30 @@ $configStage = $configApp->getScrapingStage('ProjectSourcesDownloadLink');
 
 $output_PrevStage =& $output_Array['ProjectListWebPage'];
 
+$requestPageCurlWrapper = $factory_Array['CurlWrapper']->createRequestPageCurlWrapper();
+
 $projectIndexToStop = min(
    count($output_PrevStage),
    $configStage->SkipProjectsCount + $configStage->ProcessProjectsCount,
 );
+
 for($i = $configStage->SkipProjectsCount; $i < $projectIndexToStop; ++$i)
 {
-   var_dump($output_PrevStage[$i]->id);
+
+   $url = (new ScodesterHttpRequestBuilder($configScraper->SiteUrl))
+      ->getProjectDownloadingPageRequest($output_PrevStage[$i]->id);
+
+   $response = $requestPageCurlWrapper->sendRequest($url);
+
+   $projectDownloadingPageParser = $factory_Array['Parser']->createProjectDownloadingPageParser($response);
+
+   // $projectData->ZippedSourcesUri = $projectDownloadingPageParser->getUriForZippedProjectSources();
+   var_dump($projectDownloadingPageParser->getUriForZippedProjectSources());
+
+   die;
+
+   // $projectListArray = ($factory_Array['Parser']->createProjectListWebPageParser($response))
+   // ->getProjectListJsonArray();
+
+   // var_dump($output_PrevStage[$i]->id);
 }
