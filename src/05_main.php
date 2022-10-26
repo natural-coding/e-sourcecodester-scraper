@@ -35,11 +35,11 @@ $projectListAllArray = [];
 if ($config["01-ProjectListPage"]->MakeRequestsToNetwork)
 {
    $useTestDoubles = true;
-   $curlWrapperFactory = new CurlWrapperFactory($useTestDoubles);
+   $factory_CurlWrapper = new CurlWrapperFactory($useTestDoubles);
 
-   // $curlWrapperFactory = new CurlWrapperFactory();
+   // $factory_CurlWrapper = new CurlWrapperFactory();
 
-   $requestPageCurlWrapper = $curlWrapperFactory->createRequestPageCurlWrapper();
+   $requestPageCurlWrapper = $factory_CurlWrapper->createRequestPageCurlWrapper();
 
    for($pageNumQueryParam = $config["01-ProjectListPage"]->PaginationStartPage;
       $pageNumQueryParam <= $config["01-ProjectListPage"]->PaginationEndPage;
@@ -75,11 +75,11 @@ $projectListAllArray = [];
 if ($configProjectListWebPage->MakeRequestsToNetwork)
 {
    $useTestDoubles = true;
-   $curlWrapperFactory = new CurlWrapperFactory($useTestDoubles);
+   $factory_CurlWrapper = new CurlWrapperFactory($useTestDoubles);
 
-   // $curlWrapperFactory = new CurlWrapperFactory();
+   // $factory_CurlWrapper = new CurlWrapperFactory();
 
-   $requestPageCurlWrapper = $curlWrapperFactory->createRequestPageCurlWrapper();
+   $requestPageCurlWrapper = $factory_CurlWrapper->createRequestPageCurlWrapper();
 
    for($pageNumQueryParam = $configProjectListWebPage->PaginationStartPage;
       $pageNumQueryParam <= $configProjectListWebPage->PaginationEndPage;
@@ -131,15 +131,15 @@ else
 {
    die;
    // $useTestDoubles = true;
-   // $curlWrapperFactory = new CurlWrapperFactory($useTestDoubles);
-   $curlWrapperFactory = new CurlWrapperFactory();
+   // $factory_CurlWrapper = new CurlWrapperFactory($useTestDoubles);
+   $factory_CurlWrapper = new CurlWrapperFactory();
 
    $useTestDoublesForSleepers = false;
-   $sleeperFactory = new SleeperFactory($useTestDoublesForSleepers);
+   $factory_Sleeper = new SleeperFactory($useTestDoublesForSleepers);
 
-   // $curlWrapperFactory = new CurlWrapperFactory();
+   // $factory_CurlWrapper = new CurlWrapperFactory();
 
-   $requestPageCurlWrapper = $curlWrapperFactory->createRequestPageCurlWrapper();
+   $requestPageCurlWrapper = $factory_CurlWrapper->createRequestPageCurlWrapper();
 
    for($pageNumQueryParam = $configStage->PaginationStartPage;
       $pageNumQueryParam <= $configStage->PaginationEndPage;
@@ -160,7 +160,7 @@ else
       print 'OK' . PHP_EOL;
 
       print 'Delay between requests...';
-      $sleeperFactory->createSleeper($configScraper->RequestDelayMin,$configScraper->RequestDelayMax);
+      $factory_Sleeper->createSleeper($configScraper->RequestDelayMin,$configScraper->RequestDelayMax);
       print 'OK' . PHP_EOL;
    }
 
@@ -185,15 +185,15 @@ if (!$configStage->MakeRequestsToNetwork)
 else
 {
    $useTestDoubles = true;
-   $curlWrapperFactory = new CurlWrapperFactory($useTestDoubles);
-   // $curlWrapperFactory = new CurlWrapperFactory();
+   $factory_CurlWrapper = new CurlWrapperFactory($useTestDoubles);
+   // $factory_CurlWrapper = new CurlWrapperFactory();
 
    $useTestDoublesForSleepers = true;
-   $sleeperFactory = new SleeperFactory($useTestDoublesForSleepers);
+   $factory_Sleeper = new SleeperFactory($useTestDoublesForSleepers);
+   
+   $factory_Parser = new ParserFactory();
 
-   $parserFactory = new ParserFactory();
-
-   $requestPageCurlWrapper = $curlWrapperFactory->createRequestPageCurlWrapper();
+   $requestPageCurlWrapper = $factory_CurlWrapper->createRequestPageCurlWrapper();
 
    for($pageNumQueryParam = $configStage->PaginationStartPage;
       $pageNumQueryParam <= $configStage->PaginationEndPage;
@@ -201,20 +201,20 @@ else
    {
       printf('Fetching data for page %d...', $pageNumQueryParam);
 
-      $scodesterHttpRequestBuilder = new ScodesterHttpRequestBuilder($configScraper->SiteUrl);
-      $url = $scodesterHttpRequestBuilder->getProjectListWebPageRequest($pageNumQueryParam);
+      $url = (new ScodesterHttpRequestBuilder($configScraper->SiteUrl))
+         ->getProjectListWebPageRequest($pageNumQueryParam);
 
       $response = $requestPageCurlWrapper->sendRequest($url);
 
-      $projectListWebPageParser = $parserFactory->createProjectListWebPageParser($response);
-      $projectListArray = $projectListWebPageParser->getProjectListJsonArray();
+      $projectListArray = ($factory_Parser->createProjectListWebPageParser($response))
+         ->getProjectListJsonArray();
 
       $outProjectListAllArray = array_merge($outProjectListAllArray,$projectListArray);
 
       print 'OK' . PHP_EOL;
 
       print 'Delay between requests...';
-      $sleeperFactory->createSleeper($configScraper->RequestDelayMin,$configScraper->RequestDelayMax);
+      $factory_Sleeper->createSleeper($configScraper->RequestDelayMin,$configScraper->RequestDelayMax);
       print 'OK' . PHP_EOL;
    }
 
