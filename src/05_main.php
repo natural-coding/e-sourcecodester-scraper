@@ -11,30 +11,25 @@ use App\ScodesterHttpRequestBuilder;
 
 
 $factory_Array = [];
+$factory_Array['CurlWrapper'] = new CurlWrapperFactory($useTestDoubles = true);
+$factory_Array['Sleeper'] = new SleeperFactory($useTestDoublesForSleepers = true);
+$factory_Array['Parser'] = new ParserFactory();
 
 $configApp = new Config(Constants::CONFIG_PATH . 'app-config.json');
 $configScraper = $configApp->getGlobalScraperSetup();
 
-$output_ScrapingResultsArray = [];
+$output_Array = [];
 
 $configStage = $configApp->getScrapingStage('ProjectListWebPage');
-$output_ScrapingResultsArray['ProjectListWebPage'] = [];
+$output_Array['ProjectListWebPage'] = [];
 
 if (!$configStage->MakeRequestsToNetwork)
 {
    $jsonFileName = $configApp->getFileNameForStage($configStage->name);
-   $output_ScrapingResultsArray['ProjectListWebPage'] = json_decode(file_get_contents($jsonFileName));
+   $output_Array['ProjectListWebPage'] = json_decode(file_get_contents($jsonFileName));
 }
 else
 {
-   $useTestDoubles = true;
-   $factory_Array['CurlWrapper'] = new CurlWrapperFactory($useTestDoubles);
-   
-   $useTestDoublesForSleepers = true;
-   $factory_Array['Sleeper'] = new SleeperFactory($useTestDoublesForSleepers);
-   
-   $factory_Array['Parser'] = new ParserFactory();
-
    $requestPageCurlWrapper = $factory_Array['CurlWrapper']->createRequestPageCurlWrapper();
 
    for($pageNumQueryParam = $configStage->PaginationStartPage;
@@ -51,7 +46,7 @@ else
       $projectListArray = ($factory_Array['Parser']->createProjectListWebPageParser($response))
          ->getProjectListJsonArray();
 
-      $outArr =& $output_ScrapingResultsArray['ProjectListWebPage'];
+      $outArr =& $output_Array['ProjectListWebPage'];
       $outArr = array_merge($outArr,$projectListArray);
 
       print 'OK' . PHP_EOL;
@@ -63,9 +58,9 @@ else
 
    file_put_contents(
       $configApp->getFileNameForStage($configStage->name),
-      json_encode($output_ScrapingResultsArray['ProjectListWebPage'])
+      json_encode($output_Array['ProjectListWebPage'])
    );
 }
 
 $configStage = $configApp->getScrapingStage('ProjectSourcesDownloadLink');
-$output_ScrapingResultsArray['ProjectSourcesDownloadLink'] = [];
+$output_Array['ProjectSourcesDownloadLink'] = [];
