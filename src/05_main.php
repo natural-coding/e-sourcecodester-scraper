@@ -86,10 +86,16 @@ for($i = $configStage->SkipProjectsCount; $i < $projectIndexToStop; ++$i)
 
    $projectDownloadingPageParser = $factory_Array['Parser']->createProjectDownloadingPageParser($response);
 
-   // $projectData->ZippedSourcesUri = $projectDownloadingPageParser->getUriForZippedProjectSources();
-   var_dump($projectDownloadingPageParser->getUriForZippedProjectSources());
+   $record = new stdClass();
 
+   $record->id = $output_PrevStage[$i]->id;
+   $record->ZippedSourcesUri = $projectDownloadingPageParser->getUriForZippedProjectSources();
+
+   array_push($output_Array['ProjectSourcesDownloadLink'],$record);
+
+   print_r($output_Array['ProjectSourcesDownloadLink']);
    die;
+
 
    // $projectListArray = ($factory_Array['Parser']->createProjectListWebPageParser($response))
    // ->getProjectListJsonArray();
