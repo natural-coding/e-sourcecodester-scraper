@@ -2,7 +2,7 @@
 
 namespace Framework;
 
-class HttpQueryBuilder
+class HttpRequestBuilder
 {
    private string $siteUrl;
 

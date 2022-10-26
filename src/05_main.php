@@ -5,7 +5,7 @@ require_once __DIR__ . '/vendor/autoload.php';
 use App\Config;
 use App\Constants;
 use App\Factories\CurlWrapperFactory;
-use App\ScodesterHttpQueryBuilder;
+use App\ScodesterHttpRequestBuilder;
 use App\ProjectListWebPageParser;
 use App\Factories\SleeperFactory;
 
@@ -44,8 +44,8 @@ if ($config["01-ProjectListPage"]->MakeRequestsToNetwork)
       $pageNumQueryParam <= $config["01-ProjectListPage"]->PaginationEndPage;
       ++$pageNumQueryParam)
    {
-      $scodesterHttpQueryBuilder = new ScodesterHttpQueryBuilder($configMain->getSiteUrl());
-      $url = $scodesterHttpQueryBuilder->getProjectListWebPageQuery($pageNumQueryParam);
+      $scodesterHttpRequestBuilder = new ScodesterHttpRequestBuilder($configMain->getSiteUrl());
+      $url = $scodesterHttpRequestBuilder->getProjectListWebPageRequest($pageNumQueryParam);
 
       $response = $requestPageCurlWrapper->sendRequest($url);
 
@@ -84,8 +84,8 @@ if ($configProjectListWebPage->MakeRequestsToNetwork)
       $pageNumQueryParam <= $configProjectListWebPage->PaginationEndPage;
       ++$pageNumQueryParam)
    {
-      $scodesterHttpQueryBuilder = new ScodesterHttpQueryBuilder($configApp->getSiteUrl());
-      $url = $scodesterHttpQueryBuilder->getProjectListWebPageQuery($pageNumQueryParam);
+      $scodesterHttpRequestBuilder = new ScodesterHttpRequestBuilder($configApp->getSiteUrl());
+      $url = $scodesterHttpRequestBuilder->getProjectListWebPageRequest($pageNumQueryParam);
 
       $response = $requestPageCurlWrapper->sendRequest($url);
 
@@ -126,6 +126,7 @@ if (!$configStage->MakeRequestsToNetwork)
 }
 else
 {
+   die;
    // $useTestDoubles = true;
    // $curlWrapperFactory = new CurlWrapperFactory($useTestDoubles);
    $curlWrapperFactory = new CurlWrapperFactory();
@@ -143,8 +144,8 @@ else
    {
       printf('Fetching data for page %d...', $pageNumQueryParam);
 
-      $scodesterHttpQueryBuilder = new ScodesterHttpQueryBuilder($configScraper->SiteUrl);
-      $url = $scodesterHttpQueryBuilder->getProjectListWebPageQuery($pageNumQueryParam);
+      $scodesterHttpRequestBuilder = new ScodesterHttpRequestBuilder($configScraper->SiteUrl);
+      $url = $scodesterHttpRequestBuilder->getProjectListWebPageRequest($pageNumQueryParam);
 
       $response = $requestPageCurlWrapper->sendRequest($url);
 
