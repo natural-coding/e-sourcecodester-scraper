@@ -44,13 +44,17 @@ class Config
    }
    public function getFileNameForStage(string $p_scrapingStageName) : string
    {
+      $stageFileName = 'default';
+
       $scrapingStage = $this->getScrapingStage($p_scrapingStageName);
-      
-      $stageFileName = sprintf('%s-%03d-%03d',
-         $scrapingStage->outputFilePrefix,
-         $scrapingStage->PaginationStartPage,
-         $scrapingStage->PaginationEndPage
-      );
+
+      if ($p_scrapingStageName === 'ProjectListWebPage') {
+         $stageFileName = sprintf('%s-%03d-%03d',
+            $scrapingStage->outputFilePrefix,
+            $scrapingStage->PaginationStartPage,
+            $scrapingStage->PaginationEndPage
+         );
+      }
 
       return  $this->getOutputDirForStage($p_scrapingStageName) . $stageFileName;
    }

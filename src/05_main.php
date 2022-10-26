@@ -92,13 +92,9 @@ for($i = $configStage->SkipProjectsCount; $i < $projectIndexToStop; ++$i)
    $record->ZippedSourcesUri = $projectDownloadingPageParser->getUriForZippedProjectSources();
 
    array_push($output_Array['ProjectSourcesDownloadLink'],$record);
-
-   print_r($output_Array['ProjectSourcesDownloadLink']);
-   die;
-
-
-   // $projectListArray = ($factory_Array['Parser']->createProjectListWebPageParser($response))
-   // ->getProjectListJsonArray();
-
-   // var_dump($output_PrevStage[$i]->id);
 }
+
+file_put_contents(
+   $configApp->getFileNameForStage($configStage->name),
+   json_encode($output_Array['ProjectSourcesDownloadLink'])
+);
