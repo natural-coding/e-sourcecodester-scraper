@@ -172,15 +172,16 @@ else
 */
 $configApp = new Config(Constants::CONFIG_PATH . 'app-config.json');
 $configScraper = $configApp->getGlobalScraperSetup();
-$configStage = $configApp->getScrapingStage('ProjectListWebPage');
 
-$outProjectListAllArray = [];
+$output_ScrapingResultsArray = [];
+
+$configStage = $configApp->getScrapingStage('ProjectListWebPage');
+$output_ScrapingResultsArray['ProjectListWebPage'] = [];
 
 if (!$configStage->MakeRequestsToNetwork)
 {
    $jsonFileName = $configApp->getFileNameForStage($configStage->name);
-   $outProjectListAllArray = json_decode(file_get_contents($jsonFileName));
-   var_dump($outProjectListAllArray);
+   $output_ScrapingResultsArray['ProjectListWebPage'] = json_decode(file_get_contents($jsonFileName));
 }
 else
 {
@@ -190,7 +191,7 @@ else
 
    $useTestDoublesForSleepers = true;
    $factory_Sleeper = new SleeperFactory($useTestDoublesForSleepers);
-   
+
    $factory_Parser = new ParserFactory();
 
    $requestPageCurlWrapper = $factory_CurlWrapper->createRequestPageCurlWrapper();
@@ -209,7 +210,8 @@ else
       $projectListArray = ($factory_Parser->createProjectListWebPageParser($response))
          ->getProjectListJsonArray();
 
-      $outProjectListAllArray = array_merge($outProjectListAllArray,$projectListArray);
+      $outArr =& $output_ScrapingResultsArray['ProjectListWebPage'];
+      $outArr = array_merge($outArr,$projectListArray);
 
       print 'OK' . PHP_EOL;
 
@@ -220,6 +222,6 @@ else
 
    file_put_contents(
       $configApp->getFileNameForStage($configStage->name),
-      json_encode($outProjectListAllArray)
+      json_encode($output_ScrapingResultsArray['ProjectListWebPage'])
    );
 }
