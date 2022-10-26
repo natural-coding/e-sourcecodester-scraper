@@ -64,6 +64,7 @@ else
 }
 
 $output_Array['ProjectSourcesDownloadLink'] = [];
+$factory_Array['SleeperStage2'] = new SleeperFactory($useTestDoublesForSleepers = false);
 
 $configStage = $configApp->getScrapingStage('ProjectSourcesDownloadLink');
 
@@ -92,6 +93,14 @@ for($i = $configStage->SkipProjectsCount; $i < $projectIndexToStop; ++$i)
    $record->ZippedSourcesUri = $projectDownloadingPageParser->getUriForZippedProjectSources();
 
    array_push($output_Array['ProjectSourcesDownloadLink'],$record);
+
+   printf('id: %d, uri: %s' . PHP_EOL,  $record->id, $record->ZippedSourcesUri);
+
+   print 'Delay between requests...';
+   $factory_Array['SleeperStage2']->createSleeper($configScraper->RequestDelayMin,$configScraper->RequestDelayMax);
+   print 'OK' . PHP_EOL;
+
+
 }
 
 file_put_contents(

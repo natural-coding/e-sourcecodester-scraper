@@ -20,7 +20,7 @@
       "id": 2,
       "MakeRequestsToNetwork": false,
       "SkipProjectsCount": 0,
-      "ProcessProjectsCount": 1
+      "ProcessProjectsCount": 5
     },
     {
       "name": "ProjectSourcesZipFile",
