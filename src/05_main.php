@@ -20,8 +20,9 @@ $configScraper = $configApp->getGlobalScraperSetup();
 
 $output_Array = [];
 
-$configStage = $configApp->getScrapingStage('ProjectListWebPage');
 $output_Array['ProjectListWebPage'] = [];
+
+$configStage = $configApp->getScrapingStage('ProjectListWebPage');
 
 if (!$configStage->MakeRequestsToNetwork)
 {
@@ -62,5 +63,17 @@ else
    );
 }
 
-$configStage = $configApp->getScrapingStage('ProjectSourcesDownloadLink');
 $output_Array['ProjectSourcesDownloadLink'] = [];
+
+$configStage = $configApp->getScrapingStage('ProjectSourcesDownloadLink');
+
+$output_PrevStage =& $output_Array['ProjectListWebPage'];
+
+$projectIndexToStop = min(
+   count($output_PrevStage),
+   $configStage->SkipProjectsCount + $configStage->ProcessProjectsCount,
+);
+for($i = $configStage->SkipProjectsCount; $i < $projectIndexToStop; ++$i)
+{
+   var_dump($output_PrevStage[$i]->id);
+}
